@@ -138,6 +138,18 @@
     <ClCompile Include="cDonante.cpp" />
     <ClCompile Include="cReceptor.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\G04-Ballarino-Scorza-TpFinal\tpfinal\cBSA.h" />
+    <ClInclude Include="..\..\G04-Ballarino-Scorza-TpFinal\tpfinal\cCentro_de_salud.h" />
+    <ClInclude Include="..\..\G04-Ballarino-Scorza-TpFinal\tpfinal\cDonante.h" />
+    <ClInclude Include="..\..\G04-Ballarino-Scorza-TpFinal\tpfinal\cFluido.h" />
+    <ClInclude Include="..\..\G04-Ballarino-Scorza-TpFinal\tpfinal\cMedula_osea.h" />
+    <ClInclude Include="..\..\G04-Ballarino-Scorza-TpFinal\tpfinal\cPaciente.h" />
+    <ClInclude Include="..\..\G04-Ballarino-Scorza-TpFinal\tpfinal\cPlasma.h" />
+    <ClInclude Include="..\..\G04-Ballarino-Scorza-TpFinal\tpfinal\cReceptor.h" />
+    <ClInclude Include="..\..\G04-Ballarino-Scorza-TpFinal\tpfinal\cRegistro_don.h" />
+    <ClInclude Include="..\..\G04-Ballarino-Scorza-TpFinal\tpfinal\cSangre.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

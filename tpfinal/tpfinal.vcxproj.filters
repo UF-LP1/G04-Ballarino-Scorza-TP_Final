@@ -46,4 +46,36 @@
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\G04-Ballarino-Scorza-TpFinal\tpfinal\cBSA.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\G04-Ballarino-Scorza-TpFinal\tpfinal\cCentro_de_salud.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\G04-Ballarino-Scorza-TpFinal\tpfinal\cDonante.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\G04-Ballarino-Scorza-TpFinal\tpfinal\cFluido.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\G04-Ballarino-Scorza-TpFinal\tpfinal\cMedula_osea.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\G04-Ballarino-Scorza-TpFinal\tpfinal\cPaciente.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\G04-Ballarino-Scorza-TpFinal\tpfinal\cPlasma.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\G04-Ballarino-Scorza-TpFinal\tpfinal\cReceptor.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\G04-Ballarino-Scorza-TpFinal\tpfinal\cRegistro_don.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\G04-Ballarino-Scorza-TpFinal\tpfinal\cSangre.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>
