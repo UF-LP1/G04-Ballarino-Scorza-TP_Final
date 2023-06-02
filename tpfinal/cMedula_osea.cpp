@@ -1,5 +1,5 @@
 #include "cMedula_osea.h"
 
-cMedula_osea::Medula_osea(string color) :Fluido(string estado) {
+cMedula_osea::cMedula_osea(string estado,string color) :cFluido( estado) {
 }
-~cMedula_osea::Medula_osea(){}
+cMedula_osea::~cMedula_osea(){}

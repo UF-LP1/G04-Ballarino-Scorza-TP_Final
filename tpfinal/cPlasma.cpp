@@ -1,5 +1,6 @@
 #include "cPlasma.h"
 
-cPlasma::Plasma(string tipo) :Fluido(string estado) {
+cPlasma::cPlasma(string estado, string tipo_de_plasma) :cFluido(estado) {
+	this->tipo_de_plasma = tipo_de_plasma;
 }
-~cPlasma::Plasma(){}
+cPlasma::~cPlasma(){}

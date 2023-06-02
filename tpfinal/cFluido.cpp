@@ -1,5 +1,7 @@
 #include "cFluido.h"
 
-cFluido::Fluido(string estado) {
+cFluido::cFluido(string estado) {
+	this->estado = estado;
 }
-~cFluido::Fluido() {}
+cFluido::~cFluido() {
+}

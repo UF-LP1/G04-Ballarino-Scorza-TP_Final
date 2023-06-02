@@ -1,5 +1,5 @@
 #include "cSangre.h"
 
-cSangre:: Sangre(tipo_d_sangre tiposangre, Rh rh) :Fluido(string estado) {
+cSangre:: cSangre(string estado, tipo_d_sangre tipo_de_sangre, Rh rh) :cFluido(estado) {
 }
-~csangre::sangre(){}
+cSangre::~cSangre(){}

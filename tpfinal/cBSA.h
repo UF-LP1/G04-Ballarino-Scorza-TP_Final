@@ -12,9 +12,9 @@ class cBSA {
 private:
 	list<cReceptor> receptores;
 	list<cDonante> donantes;
-	list<cCentro_de_Salud> centros_de_salud;
+	list<cCentro_de_salud> centros_de_salud;
 public:
-	cBSA(list<cReceptor*> receptores, list<cDonante*> donantes, list<cCentro_de_Salud*> centros_de_salud);
+	cBSA(list<cReceptor*> receptores, list<cDonante*> donantes, list<cCentro_de_salud*> centros_de_salud);
 
 	~cBSA();
 
