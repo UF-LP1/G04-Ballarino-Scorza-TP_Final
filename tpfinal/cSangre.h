@@ -1,7 +1,7 @@
 #pragma once
 #include "cFluido.h"
 
-class cSangre :cFluido {
+class cSangre : public cFluido {
 public:
 	enum class tipo_d_sangre { A, B, AB, CERO };
 	enum class Rh { positivo, negativo };

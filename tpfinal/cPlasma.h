@@ -1,7 +1,7 @@
 #pragma once
 #include "cFluido.h"
 
-class cPlasma :cFluido {
+class cPlasma : public cFluido {
 private:
 	string tipo_de_plasma;
 public:

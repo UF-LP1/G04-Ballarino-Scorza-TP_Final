@@ -7,10 +7,10 @@ public:
 	enum class estado { estable, inestable, recuperado };
 
 private:
-	ctime fecha_agreado_espera;
+	tm fecha_agregado_espera;
 	unsigned int prioridad;
 	estado estado_pac;
 public:
-	cReceptor(string nombre, ctime fechanac, char sexo, string peso, string tipos_sangre, string centro_salud, ctime fecha_agreado_espera, unsigned int prioridad, estado estado_pac);
+	cReceptor(string nombre, tm fechanac, char sexo, string peso, string tipos_sangre, string centro_salud, tm fecha_agregado_espera, unsigned int prioridad, estado estado_pac);
 	~cReceptor();
 };
