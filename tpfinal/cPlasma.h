@@ -6,5 +6,6 @@ private:
 	string tipo_de_plasma;
 public:
 	cPlasma(string estado, string tipo_de_plasma);
+	string getTipoFluido() override;
 	~cPlasma();
 };

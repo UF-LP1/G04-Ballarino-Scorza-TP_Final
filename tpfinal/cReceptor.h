@@ -11,6 +11,7 @@ private:
 	unsigned int prioridad;
 	estado estado_pac;
 public:
-	cReceptor(string nombre, tm fechanac, char sexo, string peso, string tipos_sangre, string centro_salud, tm fecha_agregado_espera, unsigned int prioridad, estado estado_pac);
+	cReceptor(string nombre, tm fechanac, char sexo, string peso, string tipos_sangre, string centro_salud, string rh, string fluido_elegido, tm fecha_agregado_espera, unsigned int prioridad, estado estado_pac);
+	void setFluido(string& fluido_elegido) override;
 	~cReceptor();
 };
