@@ -57,5 +57,8 @@ void cPaciente::set_fechanac(tm fechanac) {
 tm cPaciente::get_fechanac() {
     return this->fechanac;
 }
+string cPaciente::getFluido() {
+    return this->fluido_elegido;
+}
 cPaciente::~cPaciente(){
 }

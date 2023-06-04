@@ -5,7 +5,7 @@ cBSA::cBSA(list<cReceptor*>receptores, list<cDonante*>donantes, list<cCentro_de_
 centros_de_salud(centros_de_salud.begin(), centros_de_salud.end()) {
 
 }
-void cBSA::set_lista_de_centros(list<cCentro_de_salud*> centros_de_salud) {
+void cBSA::set_lista_de_centros(list<cCentro_de_salud*> centros_de_salud) {//list<cpacinete>sangre
 	this->centros_de_salud = centros_de_salud;
 }
 list<cCentro_de_salud*> cBSA::get_lista_de_centros() {
