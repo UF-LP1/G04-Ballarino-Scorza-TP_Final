@@ -9,7 +9,5 @@ void cDonante::setFluido(string& fluido_elegido) {
 	this->fluido_elegido = fluido_elegido;
 }
 cDonante::~cDonante() {
-	for (list<cRegistro_don*>::iterator it = registro_de_donaciones.begin(); it != registro_de_donaciones.end(); ++it) {
-		delete* it;
-	}
+	
 }

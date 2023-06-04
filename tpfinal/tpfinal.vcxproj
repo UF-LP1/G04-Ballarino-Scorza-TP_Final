@@ -137,6 +137,7 @@
     <ClCompile Include="cMedula_osea.cpp" />
     <ClCompile Include="cDonante.cpp" />
     <ClCompile Include="cReceptor.cpp" />
+    <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cBSA.h" />

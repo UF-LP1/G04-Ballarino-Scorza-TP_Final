@@ -38,30 +38,12 @@ void cPaciente:: set_tipo_de_Sangre_y_rh(cFluido& fluido)
         break;
     }
 }
-void cPaciente:: set_nombrecentro(string centro_salud) {
-    this->centro_salud = centro_salud;
-    return;
-}
-void cPaciente::elegircentrodesalud(list<cCentro_de_salud*>centro) {
-    int valor = 0;//el valor que debe ingresar
-    cout << "Lista de nombres de centros de salud:" << endl;
-    for (list<cCentro_de_salud*>::iterator it = centro.begin(); it != centro.end(); ++it){
-        cout << "ingrese " <<valor++ <<"si desea ir a"<<(*it)->get_nombre() << endl;
-    }
-    cout << "ingrese" << valor << "si desea salir" << endl;
-    int valorquedesea;
-    cin >> valorquedesea;
-    if (valorquedesea == valor) {
-        return;
-    }
-   
-     list<cCentro_de_salud*>::iterator it = centro.begin();
-     for (int i = 1; i < valorquedesea && it != centro.end(); ++i) {
-         ++it;
-     }
-     this->centro_salud = (*it)->get_nombre();
-     return;
-}
 
+void cPaciente::set_centro_salud(string centro_salud) {
+    this->centro_salud = centro_salud;
+}
+string cPaciente::get_centro_salud() {
+    return this->centro_salud;
+}
 cPaciente::~cPaciente(){
 }
