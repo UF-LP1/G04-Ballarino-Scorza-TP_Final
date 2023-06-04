@@ -13,4 +13,5 @@ private:
 public:
 	cCentro_de_salud(string nombre, string partido, string provincia, string direccion, string telefono);
 	~cCentro_de_salud();
+	string get_nombre();
 };

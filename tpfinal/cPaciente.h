@@ -4,6 +4,8 @@
 #include <ctime>
 #include "cFluido.h"
 #include"cSangre.h"
+#include "cCentro_de_salud.h"
+#include<list>
 using namespace std;
 
 class cPaciente {
@@ -22,6 +24,7 @@ public:
 	void set_tipo_de_Sangre_y_rh(cFluido& fluido);//HACEMOS UN SET DE LOS DOS, YA QUE EN LA VIDA REAL CUANDO SE INDICA LAS SABRE SE INDICA A PARTIR DEL TIPO Y DEL FACTOR RH
 	virtual void set_centro_de_salud(string& centro_salud) = 0;
 	virtual void setFluido(string& fluido_elegido) = 0;  //EL METODO ABSTRACTO QUE IMPLEMENTAREMOS VA A SER ELELGIR FLUIDO, POR UN LADO LOS RECEPTORES ELEGIRIAN QUE RECIBIR, Y LOS PACIENTES QUE DONAR
-	
+	void elegircentrodesalud(list<cCentro_de_salud*>centro);
+	void set_nombrecentro(string centro_salud);
 	~cPaciente();
 };
