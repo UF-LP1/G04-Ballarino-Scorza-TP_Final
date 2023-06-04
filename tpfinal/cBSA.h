@@ -27,3 +27,4 @@ public:
 	~cBSA();
 
 };
+double obtener_edad(tm fechanac);

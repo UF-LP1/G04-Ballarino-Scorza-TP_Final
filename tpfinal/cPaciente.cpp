@@ -39,11 +39,23 @@ void cPaciente:: set_tipo_de_Sangre_y_rh(cFluido& fluido)
     }
 }
 
-void cPaciente::set_centro_salud(string centro_salud) {
+void cPaciente::set_centro_salud(string &centro_salud) {
     this->centro_salud = centro_salud;
 }
 string cPaciente::get_centro_salud() {
     return this->centro_salud;
+}
+void cPaciente::set_peso(string& peso) {
+    this->peso = peso;
+}
+string cPaciente::get_peso() {
+    return this->peso;
+}
+void cPaciente::set_fechanac(tm fechanac) {
+    this->fechanac = fechanac;
+}
+tm cPaciente::get_fechanac() {
+    return this->fechanac;
 }
 cPaciente::~cPaciente(){
 }

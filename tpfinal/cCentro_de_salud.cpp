@@ -8,7 +8,7 @@ cCentro_de_salud::cCentro_de_salud(string nombre, string partido, string provinc
 	this->telefono = telefono;
 
 }
-void cCentro_de_salud::set_nombre(string nombre) {
+void cCentro_de_salud::set_nombre(string &nombre) {
 	this->nombre = nombre;
 }
 string cCentro_de_salud::get_nombre() {
