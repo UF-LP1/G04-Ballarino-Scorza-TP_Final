@@ -32,8 +32,41 @@ void cBSA::set_receptores_y_donantes()
 
 	}
 }
+void cBSA::separar_segun_fluido(list<cReceptor*> receptores, list<cDonante*> donantes) {
+	list<cReceptor*>::iterator it;
+	for (it = receptores.begin(); it != receptores.end(); it++) {
+		if ((*it)->getFluido()=="Plasma") {
+			recp_y_don_plasma.push_back((*it));
+		}
+		else if((*it)->getFluido() == "Sangre")
+		{
+			recp_y_don_sangre.push_back((*it));
+		}
+		else if((*it)->getFluido() == "Medula osea")
+		{
+			recp_y_don_medula_osea.push_back((*it));
+		}
+	}
+	list<cDonante*>::iterator it2;
+
+	for (it2 = donantes.begin(); it2 != donantes.end(); it++) {
+		if ((*it2)->getFluido() == "Plasma") {
+			recp_y_don_plasma.push_back((*it2));
+		}
+		else if ((*it2)->getFluido() == "Sangre")
+		{
+			recp_y_don_sangre.push_back((*it2));
+		}
+		else if ((*it2)->getFluido() == "Medula osea")
+		{
+			recp_y_don_medula_osea.push_back((*it2));
+		}
+	}
+	return;
+}
 cBSA::~cBSA(){
 }
+
 double obtener_edad(tm fechanac) {
 	time_t timer;
 	time(&timer);   //usamos el timer para tener la fecha y hora actual 

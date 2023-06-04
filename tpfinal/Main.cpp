@@ -18,4 +18,4 @@ for (int i = 1; i < valorquedesea && it != centro.end(); ++i) {
 this->centro_salud = (*it)->get_nombre();
 return;
 }
-*/
+*///EN EL MAIN ELIJE FLUIDO

@@ -37,5 +37,6 @@ public:
 	void set_fechanac(tm fechanac);
 	tm get_fechanac();
 	string getFluido();
+
 	~cPaciente();
 };

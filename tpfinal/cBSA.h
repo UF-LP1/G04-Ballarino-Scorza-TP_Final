@@ -12,6 +12,9 @@ using namespace std;
 class cBSA {
 private:
 	list<cReceptor*> receptores;
+	list<cPaciente*>recp_y_don_plasma;
+    list<cPaciente*>recp_y_don_sangre;
+    list<cPaciente*>recp_y_don_medula_osea;
 	list<cDonante*> donantes;
 	list<cCentro_de_salud*> centros_de_salud;
 public:
@@ -24,8 +27,7 @@ public:
 	*/
 	void set_receptores_y_donantes();//IMPORTANTE REMARCAR QUE EL SET NO RECIBE NADA YA QUE SE CARGAN A PARTIR DEL ATRIBUTO CENTRO DE SALUD
 	//QUE YA ESTA CONTENIDO EN LA CLASE, ESTE TIENE SUS LISTAS DE PACIENTES
-	
-	
+	void separar_segun_fluido(list<cReceptor*> receptores, list<cDonante*> donantes);
 	~cBSA();
 
 };
