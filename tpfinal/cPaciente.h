@@ -34,7 +34,7 @@ public:
 	string get_centro_salud();
 	void set_peso(string &peso);
 	string get_peso();
-	void set_fechanac(tm fechanac);
+	void set_fechanac(tm &fechanac);
 	tm get_fechanac();
 	string getFluido();
 

@@ -4,14 +4,19 @@
 
 class cReceptor :public cPaciente {
 public:
-	enum class estado { estable, inestable, recuperado };
+	enum class estado { inestable,estable, recuperado };
 
 private:
-	tm fecha_agregado_espera;
+	tm *fecha_agregado_espera;//ESTE ATRIBUTO SE CARGA EN EL BSA, EL DIA QUE FUE AGREGADO
 	unsigned int prioridad;
 	estado estado_pac;
 public:
 	cReceptor(string nombre, tm fechanac, char sexo, string peso, string tipos_sangre, string centro_salud, string rh, string fluido_elegido, tm fecha_agregado_espera, unsigned int prioridad, estado estado_pac);
 	void setFluido(string& fluido_elegido) override;
+	void set_prioridad(unsigned int &prioridad);
+	unsigned int get_prioridad();
+	estado get_estado();
+	void set_fecha_agregado_espera(tm fecha_agregado_espera);
+	tm get_fecha_agregado_espera();
 	~cReceptor();
 };

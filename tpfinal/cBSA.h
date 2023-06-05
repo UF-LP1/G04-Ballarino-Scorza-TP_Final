@@ -28,7 +28,10 @@ public:
 	void set_receptores_y_donantes();//IMPORTANTE REMARCAR QUE EL SET NO RECIBE NADA YA QUE SE CARGAN A PARTIR DEL ATRIBUTO CENTRO DE SALUD
 	//QUE YA ESTA CONTENIDO EN LA CLASE, ESTE TIENE SUS LISTAS DE PACIENTES
 	void separar_segun_fluido(list<cReceptor*> receptores, list<cDonante*> donantes);
+	
+	cReceptor* elegir_receptor(string& fluido);//LA IDEA ES QUE EL BANCO DE SANGRE SELECCIOENE EL FLUIDO QUE QUIERA HACER EL MATCH
 	~cBSA();
 
 };
-double obtener_edad(tm fechanac);
+double distancia_fechas(tm fecha);//LA USAMOS PARA COMPARAR LAS DISTANCIAS RESPECTO A LA FECHA DE HOY, COMO LA EDAD, FECHAS DE INGRESO.
+tm setear_fecha_ingreso_espera();//	SETEO LA FECHA DE INGRESO CON LA FECHA DE HOY, EN EL SENTIDO QUE SERIA EL DIA QUE LLEGO
