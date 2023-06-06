@@ -51,7 +51,7 @@ void cPaciente::set_peso(string& peso) {
 string cPaciente::get_peso() {
     return this->peso;
 }
-void cPaciente::set_fechanac(tm fechanac) {
+void cPaciente::set_fechanac(tm &fechanac) {
     this->fechanac = fechanac;
 }
 tm cPaciente::get_fechanac() {

@@ -1,3 +1,5 @@
+
+
 #include "cBSA.h"
 
 cBSA::cBSA(list<cReceptor*>receptores, list<cDonante*>donantes, list<cCentro_de_salud*>centros_de_salud)
@@ -115,10 +117,12 @@ double distancia_fechas(tm fecha) {
 	//ahora tengo cuantos anios tiene la persona en segundos, lo pasamos a anios y lo retornamos;
 	return dist_fecha;
 }
+
 tm setear_fecha_ingreso_espera() {
-		time_t hoy = time(nullptr);  // Obtener la fecha y hora actual en segundos desde la Época Unix
+	time_t hoy = time(nullptr);// Obtener la fecha y hora actual en segundos desde la Época Unix
 
-		tm* hoy_ = localtime(&hoy);  // Convertir a una estructura de tipo tm en la zona horaria local
+	tm hoy_;
+	localtime_s(&hoy_, &hoy);// Recibe mi variable hoy de tipo time_t y localtimes_s te la devuelve de tipo tm,	que es lo que quiere devolver esta funcion 
 
-		return *hoy_;
-	}
+	return hoy_;
+}

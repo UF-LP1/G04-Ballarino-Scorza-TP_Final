@@ -21,7 +21,7 @@ void cReceptor::set_fecha_agregado_espera(tm fecha_agregado_espera) {
 	*this->fecha_agregado_espera = fecha_agregado_espera;
 }
 tm cReceptor::get_fecha_agregado_espera() {
-	this->fecha_agregado_espera;
+return *this->fecha_agregado_espera;
 }
 cReceptor::~cReceptor(){
 }
