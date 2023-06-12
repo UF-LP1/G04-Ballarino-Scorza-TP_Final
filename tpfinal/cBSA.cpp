@@ -68,14 +68,27 @@ void cBSA::separar_segun_fluido(list<cReceptor*> receptores, list<cDonante*> don
 	return;
 }
 
-cReceptor* cBSA::elegir_receptor(string& fluido) { // DEVOLVEMOS CRECEPTOR YA QUE LA PRIORIDAD LA TIENEN RECEPTORES
+cReceptor* cBSA::match(string& fluido) { // DEVOLVEMOS CRECEPTOR YA QUE LA PRIORIDAD LA TIENEN RECEPTORES
 	cReceptor* receptor_seleccionado = nullptr;
-
+	cDonante* donante_seleccionado = nullptr;
 	if (fluido == "Plasma") {
-		receptor_seleccionado = seleccionar_receptor(recp_y_don_plasma,receptor_seleccionado);
+
+		receptor_seleccionado = receptor_prioridad(recp_y_don_plasma,receptor_seleccionado);
+		if (receptor_seleccionado != nullptr) {
+			donante_seleccionado = buscar_donante_compatibles( recp_y_don_plasma, donante_seleccionado);
+			if (donante_seleccionado != nullptr) {
+				protocolo_transplante(receptor_seleccionado, donante_seleccionado);
+			}
+		}
 	}
 	else if(fluido == "Medula Osea") {
-		receptor_seleccionado = seleccionar_receptor(recp_y_don_medula_osea, receptor_seleccionado);
+		receptor_seleccionado = receptor_prioridad(recp_y_don_medula_osea, receptor_seleccionado);
+		if (receptor_seleccionado != nullptr) {
+			cDonante* donante = buscar_donante_compatibles(receptor_seleccionado, recp_y_don_medula_osea);
+			if (donante != nullptr) {
+				protocolo_transplante(receptor_seleccionado, donante);
+			}
+		}
 	}
 	else if (fluido == "Sangre") {
 		list<cPaciente*>::iterator itReceptores;
@@ -99,7 +112,7 @@ cReceptor* cBSA::elegir_receptor(string& fluido) { // DEVOLVEMOS CRECEPTOR YA QU
 
 
 
-cReceptor* seleccionar_receptor(list<cPaciente*>& lista_receptores, cReceptor* receptor_seleccionado)
+cReceptor* receptor_prioridad(list<cPaciente*>& lista_receptores, cReceptor* receptor_seleccionado)
 {
 	list<cPaciente*>::iterator itReceptores;
 
@@ -118,6 +131,7 @@ cReceptor* seleccionar_receptor(list<cPaciente*>& lista_receptores, cReceptor* r
 
 	return receptor_seleccionado;
 }
+cDonante* buscar_donante_compatibles(receptor_seleccionado, recp_y_don_plasma)
 
 cBSA::~cBSA(){
 }
@@ -144,6 +158,7 @@ tm setear_fecha_ingreso_espera() {
 
 	return hoy_;
 }
+
 /*
 bool cBSA::verificarCompatibilidad(tipo_d_sangre tipoDonante, tipo_d_sangre tipoReceptor, Rh rhDonante, Rh rhReceptor) {
 	if (tipoDonante == tipo_d_sangre::CERO && (tipoReceptor == tipo_d_sangre::CERO || tipoReceptor == tipo_d_sangre::A || tipoReceptor == tipo_d_sangre::B || tipoReceptor == tipo_d_sangre::AB) && rhDonante == rhReceptor) {
