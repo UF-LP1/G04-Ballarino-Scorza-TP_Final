@@ -34,8 +34,10 @@ public:
 	
 	cReceptor* match(string& fluido);//LA IDEA ES QUE EL BANCO DE SANGRE SELECCIOENE EL FLUIDO QUE QUIERA HACER EL MATCH
 
-	cReceptor* receptor_prioridad(list<cPaciente*>& lista_receptores, cReceptor* receptor_seleccionado);
-	cDonante* buscar_donante_compatibles(list<cPaciente*>& lista_donante, cDonante* donante_seleccionado);
+	cReceptor* receptor_prioridad(list<cPaciente*>& lista_receptores, cReceptor* receptor_seleccionado);// ESTOS CUATRO METODOS SON PARA EL MATCH, RECORREN,BUSCAN, POR CONDICIONES
+	cDonante* buscar_donante_compatibles(list<cPaciente*>& lista_donantes, cDonante* donante_seleccionado);
+	cDonante* buscar_donante_compatibles_sangre(list<cPaciente*>& lista_donantes, cDonante* donante_seleccionado, cReceptor* receptor_seleccionado);
+	bool verificar_compatibilidad_sangre(cReceptor* receptor_seleccionado, cDonante* donante_seleccionado);
 	~cBSA();
 
 };

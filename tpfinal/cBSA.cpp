@@ -73,46 +73,39 @@ cReceptor* cBSA::match(string& fluido) { // DEVOLVEMOS CRECEPTOR YA QUE LA PRIOR
 	cDonante* donante_seleccionado = nullptr;
 	if (fluido == "Plasma") {
 
-		receptor_seleccionado = receptor_prioridad(recp_y_don_plasma,receptor_seleccionado);
+		receptor_seleccionado = receptor_prioridad(recp_y_don_plasma, receptor_seleccionado);
 		if (receptor_seleccionado != nullptr) {
-			donante_seleccionado = buscar_donante_compatibles( recp_y_don_plasma, donante_seleccionado);
+			donante_seleccionado = buscar_donante_compatibles(recp_y_don_plasma, donante_seleccionado);
 			if (donante_seleccionado != nullptr) {
-				protocolo_transplante(receptor_seleccionado, donante_seleccionado);
+				//protocolo_transplante(receptor_seleccionado, donante_seleccionado);
 			}
 		}
 	}
-	else if(fluido == "Medula Osea") {
+	else if (fluido == "Medula Osea") {
 		receptor_seleccionado = receptor_prioridad(recp_y_don_medula_osea, receptor_seleccionado);
 		if (receptor_seleccionado != nullptr) {
-			cDonante* donante = buscar_donante_compatibles(receptor_seleccionado, recp_y_don_medula_osea);
-			if (donante != nullptr) {
-				protocolo_transplante(receptor_seleccionado, donante);
+			donante_seleccionado = buscar_donante_compatibles(recp_y_don_medula_osea, donante_seleccionado);
+			if (donante_seleccionado != nullptr) {
+				//protocolo_transplante(receptor_seleccionado, donante);
 			}
 		}
 	}
-	else if (fluido == "Sangre") {
-		list<cPaciente*>::iterator itReceptores;
-
-		for (itReceptores = recp_y_don_sangre.begin(); itReceptores != recp_y_don_sangre.end(); ++itReceptores) {
-			cReceptor* receptor = dynamic_cast<cReceptor*>(*itReceptores);
-			if (receptor != nullptr) {
-				if (receptor_seleccionado == nullptr ||
-					receptor->get_prioridad() > receptor_seleccionado->get_prioridad() ||
-					(receptor->get_prioridad() == receptor_seleccionado->get_prioridad() &&
-						(receptor->get_estado() < receptor_seleccionado->get_estado() ||
-							distancia_fechas(receptor->get_fecha_agregado_espera()) > distancia_fechas(receptor_seleccionado->get_fecha_agregado_espera())))) {
-					receptor_seleccionado = receptor;
+	else if (fluido == "Sangre") 
+	{
+		 	receptor_seleccionado = receptor_prioridad(recp_y_don_sangre, receptor_seleccionado);
+			if (receptor_seleccionado != nullptr) {
+				donante_seleccionado = buscar_donante_compatibles_sangre(recp_y_don_sangre, donante_seleccionado,receptor_seleccionado);
+				if(donante_seleccionado ==nullptr){
+					receptor_seleccionado = nullptr;
+			}
+				else {
+					//protocolo_transplante(receptor_seleccionado, donante);
 				}
-			}
 		}
+		return receptor_seleccionado;
 	}
-
-	return receptor_seleccionado;
 }
-
-
-
-cReceptor* receptor_prioridad(list<cPaciente*>& lista_receptores, cReceptor* receptor_seleccionado)
+cReceptor* cBSA::receptor_prioridad(list<cPaciente*>& lista_receptores, cReceptor* receptor_seleccionado)
 {
 	list<cPaciente*>::iterator itReceptores;
 
@@ -131,7 +124,67 @@ cReceptor* receptor_prioridad(list<cPaciente*>& lista_receptores, cReceptor* rec
 
 	return receptor_seleccionado;
 }
-cDonante* buscar_donante_compatibles(receptor_seleccionado, recp_y_don_plasma)
+cDonante* cBSA::buscar_donante_compatibles(list<cPaciente*>& lista_donantes, cDonante* donante_seleccionado) {
+	list<cPaciente*>::iterator itDonantes;
+	for (itDonantes = lista_donantes.begin(); itDonantes != lista_donantes.end(); ++itDonantes) {
+		cDonante* donante = dynamic_cast<cDonante*>(*itDonantes);
+		if (donante != nullptr)
+			return donante;
+	}
+
+}
+
+cDonante* cBSA::buscar_donante_compatibles_sangre(list<cPaciente*>& lista_donantes, cDonante* donante_seleccionado, cReceptor* receptor_seleccionado) {
+	list<cPaciente*>::iterator itDonantes;
+	for (itDonantes = lista_donantes.begin(); itDonantes != lista_donantes.end(); ++itDonantes) {
+		cDonante* donante = dynamic_cast<cDonante*>(*itDonantes);
+		if (donante != nullptr && verificar_compatibilidad_sangre(receptor_seleccionado, donante_seleccionado))
+			return donante;
+		else
+			return donante = nullptr;
+	}
+}
+
+bool  cBSA::verificar_compatibilidad_sangre(cReceptor* receptor_seleccionado, cDonante* donante_seleccionado) {
+	string tipoDonante = donante_seleccionado->get_tipos_sangre();
+	string tipoReceptor = receptor_seleccionado->get_tipos_sangre();
+	string rhDonante = donante_seleccionado->get_rh();
+	string rhReceptor = receptor_seleccionado->get_rh();
+
+	if (tipoDonante == "0" && (tipoReceptor == "0" || tipoReceptor == "A" || tipoReceptor == "B" || tipoReceptor == "AB") && rhDonante == rhReceptor) {
+		return true;
+	}
+	else if (tipoDonante == "A" && (tipoReceptor == "A" || tipoReceptor == "AB") && (rhDonante == rhReceptor || rhDonante == "positivo")) {
+		return true;
+	}
+	else if (tipoDonante == "B" && (tipoReceptor == "B" || tipoReceptor == "AB") && (rhDonante == rhReceptor || rhDonante == "positivo")) {
+		return true;
+	}
+	else if (tipoDonante == "AB" && tipoReceptor == "AB" && rhDonante == rhReceptor) {
+		return true;
+	}
+	else if (tipoDonante == "0" && tipoReceptor == "A" && rhDonante == rhReceptor) {
+		return true;
+	}
+	else if (tipoDonante == "0" && tipoReceptor == "B" && rhDonante == rhReceptor) {
+		return true;
+	}
+	else if (tipoDonante == "A" && tipoReceptor == "AB" && (rhDonante == rhReceptor || rhDonante == "positivo")) {
+		return true;
+	}
+	else if (tipoDonante == "B" && tipoReceptor == "AB" && (rhDonante == rhReceptor || rhDonante == "positivo")) {
+		return true;
+	}
+	else if (tipoDonante == "0" && tipoReceptor == "AB" && rhDonante == rhReceptor) {
+		return true;
+	}
+	else if (tipoDonante == "AB" && (tipoReceptor == "A" || tipoReceptor == "B" || tipoReceptor == "AB") && (rhDonante == rhReceptor || rhDonante == "positivo")) {
+		return true;
+	}
+
+	return false;
+}
+
 
 cBSA::~cBSA(){
 }
@@ -159,80 +212,5 @@ tm setear_fecha_ingreso_espera() {
 	return hoy_;
 }
 
-/*
-bool cBSA::verificarCompatibilidad(tipo_d_sangre tipoDonante, tipo_d_sangre tipoReceptor, Rh rhDonante, Rh rhReceptor) {
-	if (tipoDonante == tipo_d_sangre::CERO && (tipoReceptor == tipo_d_sangre::CERO || tipoReceptor == tipo_d_sangre::A || tipoReceptor == tipo_d_sangre::B || tipoReceptor == tipo_d_sangre::AB) && rhDonante == rhReceptor) {
-		return true;
-	} else if (tipoDonante == tipo_d_sangre::A && (tipoReceptor == tipo_d_sangre::A || tipoReceptor == tipo_d_sangre::AB) && rhDonante == rhReceptor) {
-		return true;
-	} else if (tipoDonante == tipo_d_sangre::B && (tipoReceptor == tipo_d_sangre::B || tipoReceptor == tipo_d_sangre::AB) && rhDonante == rhReceptor) {
-		return true;
-	} else if (tipoDonante == tipo_d_sangre::AB && tipoReceptor == tipo_d_sangre::AB && rhDonante == rhReceptor) {
-		return true;
-	} else if (tipoDonante == tipo_d_sangre::CERO && tipoReceptor == tipo_d_sangre::A && rhDonante == rhReceptor) {
-		return true;
-	} else if (tipoDonante == tipo_d_sangre::CERO && tipoReceptor == tipo_d_sangre::B && rhDonante == rhReceptor) {
-		return true;
-	} else if (tipoDonante == tipo_d_sangre::A && tipoReceptor == tipo_d_sangre::AB && rhDonante == rhReceptor) {
-		return true;
-	} else if (tipoDonante == tipo_d_sangre::B && tipoReceptor == tipo_d_sangre::AB && rhDonante == rhReceptor) {
-		return true;
-	} else if (tipoDonante == tipo_d_sangre::CERO && tipoReceptor == tipo_d_sangre::AB && rhDonante == rhReceptor) {
-		return true;
-	} else if (tipoDonante == tipo_d_sangre::AB && tipoReceptor == tipo_d_sangre::AB && rhDonante == rhReceptor) {
-		return true;
-	} else if (tipoDonante == tipo_d_sangre::CERO && tipoReceptor == tipo_d_sangre::AB && rhDonante == Rh::positivo) {
-		return true;
-	} else if (tipoDonante == tipo_d_sangre::AB && tipoReceptor == tipo_d_sangre::AB && rhDonante == Rh::positivo) {
-		return true;
-	}
 
-	return false;
-}
-}*/
-/*
-cReceptor* cBSA::elegir_receptor(string& fluido) {
-	cReceptor* receptor_seleccionado = nullptr;
-
-	if (fluido == "Plasma") {
-		receptor_seleccionado = seleccionar_receptor(recp_y_don_plasma, receptor_seleccionado);
-		if (receptor_seleccionado != nullptr) {
-			cDonante* donante = buscar_donante_compatibles(receptor_seleccionado, recp_y_don_plasma);
-			if (donante != nullptr) {
-				protocolo_transplante(receptor_seleccionado, donante);
-			}
-		}
-	}
-	else if (fluido == "Medula Osea") {
-		receptor_seleccionado = seleccionar_receptor(recp_y_don_medula_osea, receptor_seleccionado);
-		if (receptor_seleccionado != nullptr) {
-			cDonante* donante = buscar_donante_compatibles(receptor_seleccionado, recp_y_don_medula_osea);
-			if (donante != nullptr) {
-				protocolo_transplante(receptor_seleccionado, donante);
-			}
-		}
-	}
-	else if (fluido == "Sangre") {
-		list<cPaciente*>::iterator itReceptores;
-		bool donante_encontrado = false;
-
-		do {
-			for (itReceptores = recp_y_don_sangre.begin(); itReceptores != recp_y_don_sangre.end(); ++itReceptores) {
-				cReceptor* receptor = dynamic_cast<cReceptor*>(*itReceptores);
-				if (receptor != nullptr) {
-					if (verificar_compatibilidad(receptor, recp_y_don_sangre)) {
-						receptor_seleccionado = receptor;
-						cDonante* donante = buscar_donante_compatibles(receptor_seleccionado, recp_y_don_sangre);
-						if (donante != nullptr) {
-							protocolo_transplante(receptor_seleccionado, donante);
-							donante_encontrado = true;
-							break;
-						}
-					}
-				}
-			}
-		} while (!donante_encontrado && ++itReceptores != recp_y_don_sangre.end());
-	}
-
-	return receptor_seleccionado;
-}*/
+	

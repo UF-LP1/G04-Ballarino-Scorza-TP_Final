@@ -38,7 +38,12 @@ void cPaciente:: set_tipo_de_Sangre_y_rh(cFluido& fluido)
         break;
     }
 }
-
+string cPaciente::get_tipos_sangre() {
+    return this->tipos_sangre;
+}
+string cPaciente::get_rh() {
+    return  this->rh;
+}
 void cPaciente::set_centro_salud(string &centro_salud) {
     this->centro_salud = centro_salud;
 }
