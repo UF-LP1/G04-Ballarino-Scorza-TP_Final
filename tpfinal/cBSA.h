@@ -11,12 +11,15 @@ using namespace std;
 
 class cBSA {
 private:
+
 	list<cReceptor*> receptores;
 	list<cPaciente*>recp_y_don_plasma;
     list<cPaciente*>recp_y_don_sangre;
     list<cPaciente*>recp_y_don_medula_osea;
 	list<cDonante*> donantes;
 	list<cCentro_de_salud*> centros_de_salud;
+	
+	
 public:
 	cBSA(list<cReceptor*> receptores, list<cDonante*> donantes, list<cCentro_de_salud*> centros_de_salud);
 	void set_lista_de_centros(list<cCentro_de_salud*> centros_de_salud);
@@ -30,6 +33,8 @@ public:
 	void separar_segun_fluido(list<cReceptor*> receptores, list<cDonante*> donantes);
 	
 	cReceptor* elegir_receptor(string& fluido);//LA IDEA ES QUE EL BANCO DE SANGRE SELECCIOENE EL FLUIDO QUE QUIERA HACER EL MATCH
+
+	cReceptor* seleccionar_receptor(list<cPaciente*>& lista_receptores, cReceptor* receptor_seleccionado);
 	~cBSA();
 
 };
