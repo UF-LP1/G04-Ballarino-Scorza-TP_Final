@@ -9,6 +9,7 @@ using namespace std;
 #include "cCentro_de_salud.h"
 
 
+
 class cBSA {
 private:
 
@@ -38,6 +39,7 @@ public:
 	cDonante* buscar_donante_compatibles(list<cPaciente*>& lista_donantes, cDonante* donante_seleccionado);
 	cDonante* buscar_donante_compatibles_sangre(list<cPaciente*>& lista_donantes, cDonante* donante_seleccionado, cReceptor* receptor_seleccionado);
 	bool verificar_compatibilidad_sangre(cReceptor* receptor_seleccionado, cDonante* donante_seleccionado);
+	bool protocolo_transplante_inicio(cReceptor* receptor_seleccionado, cDonante* donante_seleccionado);
 	~cBSA();
 
 };

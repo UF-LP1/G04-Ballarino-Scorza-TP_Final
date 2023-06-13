@@ -1,6 +1,6 @@
 #include "cPaciente.h"
 
-cPaciente::cPaciente(string nombre, tm fechanac,char sexo, string peso, string tipos_sangre,string centro_salud,string rh, string fluido_elegido) {
+cPaciente::cPaciente(string nombre, tm fechanac,char sexo, string peso, string tipos_sangre,string centro_salud,string rh, string fluido_elegido,string partido,string provincia) {
 	this->nombre = nombre;
 	this->fechanac = fechanac;
 	this->sexo = sexo;
@@ -9,6 +9,8 @@ cPaciente::cPaciente(string nombre, tm fechanac,char sexo, string peso, string t
 	this->centro_salud = centro_salud;
     this->rh = rh;
     this->fluido_elegido = fluido_elegido;
+    this->provincia = provincia;
+    this->partido = partido;
 }
 void cPaciente:: set_tipo_de_Sangre_y_rh(cFluido& fluido) 
 {
@@ -64,6 +66,20 @@ tm cPaciente::get_fechanac() {
 }
 string cPaciente::getFluido() {
     return this->fluido_elegido;
+}
+string cPaciente::getpartido() {
+    return this->partido;
+}
+void cPaciente::set_partido(string& partido) {
+    this->partido = partido;
+    return;
+}
+string cPaciente::getprovincia() {
+    return this->provincia;
+}
+void cPaciente::set_provincia(string& provincia) {
+    this->provincia = provincia;
+    return;
 }
 cPaciente::~cPaciente(){
 }

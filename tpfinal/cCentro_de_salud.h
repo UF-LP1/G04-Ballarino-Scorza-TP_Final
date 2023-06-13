@@ -3,8 +3,10 @@
 #include<iostream>
 #include "cPaciente.h"
 #include<list>
+#include "cDonante.h"
+#include"cReceptor.h"
 using namespace std;
-
+class cBsa;
 class cCentro_de_salud {
 private:
 	string nombre;
@@ -21,4 +23,7 @@ public:
 	string get_nombre();
 	void set_pacientes_del_centro(list<cPaciente*>& pacientes);
 	list<cPaciente*> get_pacientes_del_centro();
+	 void protocolo_de_transplante_final(cReceptor* receptor_seleccionado, cDonante* donante_seleccionado);
+	 friend class cBSA;
+	 cCentro_de_salud();
 };

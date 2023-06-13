@@ -21,7 +21,8 @@ void cCentro_de_salud::set_pacientes_del_centro(list<cPaciente*>& pacientes) {
 	while (it != pacientes.end()) {
 		if ((*it)->get_centro_salud() == this->nombre) {
 			pacientes_del_centro.push_back(*it);// CADA CENTRO DE SALUD TENDRA SU PROPIA LISTA DE PACIENTES
-
+			(*it)->set_partido(this->partido);
+			(*it)->set_provincia(this->provincia);
 		}
 
 		it++;
@@ -29,6 +30,12 @@ void cCentro_de_salud::set_pacientes_del_centro(list<cPaciente*>& pacientes) {
 }
 list<cPaciente*> cCentro_de_salud::get_pacientes_del_centro() {
 	return this->pacientes_del_centro;
+}
+void cCentro_de_salud::protocolo_de_transplante_final(cReceptor* receptor_seleccionado, cDonante* donante_seleccionado) {
+
+}
+cCentro_de_salud::cCentro_de_salud() {
+
 }
 cCentro_de_salud::~cCentro_de_salud() {
 

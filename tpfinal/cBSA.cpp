@@ -1,6 +1,7 @@
 
 
 #include "cBSA.h"
+#include "cCentro_de_salud.h"
 
 cBSA::cBSA(list<cReceptor*>receptores, list<cDonante*>donantes, list<cCentro_de_salud*>centros_de_salud)
 	: receptores(receptores.begin(), receptores.end()),donantes(donantes.begin(), donantes.end()),
@@ -71,13 +72,14 @@ void cBSA::separar_segun_fluido(list<cReceptor*> receptores, list<cDonante*> don
 cReceptor* cBSA::match(string& fluido) { // DEVOLVEMOS CRECEPTOR YA QUE LA PRIORIDAD LA TIENEN RECEPTORES
 	cReceptor* receptor_seleccionado = nullptr;
 	cDonante* donante_seleccionado = nullptr;
+	bool protocolo;
 	if (fluido == "Plasma") {
 
 		receptor_seleccionado = receptor_prioridad(recp_y_don_plasma, receptor_seleccionado);
 		if (receptor_seleccionado != nullptr) {
 			donante_seleccionado = buscar_donante_compatibles(recp_y_don_plasma, donante_seleccionado);
 			if (donante_seleccionado != nullptr) {
-				//protocolo_transplante(receptor_seleccionado, donante_seleccionado);
+				protocolo= protocolo_transplante_inicio(receptor_seleccionado, donante_seleccionado);
 			}
 		}
 	}
@@ -86,7 +88,7 @@ cReceptor* cBSA::match(string& fluido) { // DEVOLVEMOS CRECEPTOR YA QUE LA PRIOR
 		if (receptor_seleccionado != nullptr) {
 			donante_seleccionado = buscar_donante_compatibles(recp_y_don_medula_osea, donante_seleccionado);
 			if (donante_seleccionado != nullptr) {
-				//protocolo_transplante(receptor_seleccionado, donante);
+				protocolo= protocolo_transplante_inicio(receptor_seleccionado, donante_seleccionado);
 			}
 		}
 	}
@@ -99,12 +101,13 @@ cReceptor* cBSA::match(string& fluido) { // DEVOLVEMOS CRECEPTOR YA QUE LA PRIOR
 					receptor_seleccionado = nullptr;
 			}
 				else {
-					//protocolo_transplante(receptor_seleccionado, donante);
+					protocolo = protocolo_transplante_inicio(receptor_seleccionado, donante_seleccionado);
 				}
 		}
 		return receptor_seleccionado;
 	}
 }
+
 cReceptor* cBSA::receptor_prioridad(list<cPaciente*>& lista_receptores, cReceptor* receptor_seleccionado)
 {
 	list<cPaciente*>::iterator itReceptores;
@@ -185,6 +188,14 @@ bool  cBSA::verificar_compatibilidad_sangre(cReceptor* receptor_seleccionado, cD
 	return false;
 }
 
+bool cBSA::protocolo_transplante_inicio(cReceptor* receptor_seleccionado, cDonante* donante_seleccionado) {
+	if (receptor_seleccionado->getprovincia() == donante_seleccionado->getprovincia() && receptor_seleccionado->getpartido() == donante_seleccionado->getpartido()) {
+		cCentro_de_salud centro;
+		centro.protocolo_de_transplante_final(receptor_seleccionado, donante_seleccionado);
+		return true;
+	}
+	else return false;
+}
 
 cBSA::~cBSA(){
 }
