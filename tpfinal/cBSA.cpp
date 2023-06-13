@@ -79,7 +79,7 @@ cReceptor* cBSA::match(string& fluido) { // DEVOLVEMOS CRECEPTOR YA QUE LA PRIOR
 		if (receptor_seleccionado != nullptr) {
 			donante_seleccionado = buscar_donante_compatibles(recp_y_don_plasma, donante_seleccionado);
 			if (donante_seleccionado != nullptr) {
-				protocolo= protocolo_transplante_inicio(receptor_seleccionado, donante_seleccionado);
+				protocolo= protocolo_transplante_inicio(receptor_seleccionado, donante_seleccionado, recp_y_don_plasma);
 			}
 		}
 	}
@@ -88,7 +88,7 @@ cReceptor* cBSA::match(string& fluido) { // DEVOLVEMOS CRECEPTOR YA QUE LA PRIOR
 		if (receptor_seleccionado != nullptr) {
 			donante_seleccionado = buscar_donante_compatibles(recp_y_don_medula_osea, donante_seleccionado);
 			if (donante_seleccionado != nullptr) {
-				protocolo= protocolo_transplante_inicio(receptor_seleccionado, donante_seleccionado);
+				protocolo= protocolo_transplante_inicio(receptor_seleccionado, donante_seleccionado, recp_y_don_medula_osea);
 			}
 		}
 	}
@@ -101,7 +101,7 @@ cReceptor* cBSA::match(string& fluido) { // DEVOLVEMOS CRECEPTOR YA QUE LA PRIOR
 					receptor_seleccionado = nullptr;
 			}
 				else {
-					protocolo = protocolo_transplante_inicio(receptor_seleccionado, donante_seleccionado);
+					protocolo = protocolo_transplante_inicio(receptor_seleccionado, donante_seleccionado, recp_y_don_sangre);
 				}
 		}
 		return receptor_seleccionado;
@@ -112,7 +112,7 @@ cReceptor* cBSA::receptor_prioridad(list<cPaciente*>& lista_receptores, cRecepto
 {
 	list<cPaciente*>::iterator itReceptores;
 
-	for (itReceptores = lista_receptores.begin(); itReceptores != lista_receptores.end(); ++itReceptores) {
+	for (itReceptores = lista_receptores.begin(); itReceptores != lista_receptores.end(); itReceptores++) {
 		cReceptor* receptor = dynamic_cast<cReceptor*>(*itReceptores);
 		if (receptor != nullptr) {
 			if (receptor_seleccionado == nullptr ||
@@ -129,7 +129,7 @@ cReceptor* cBSA::receptor_prioridad(list<cPaciente*>& lista_receptores, cRecepto
 }
 cDonante* cBSA::buscar_donante_compatibles(list<cPaciente*>& lista_donantes, cDonante* donante_seleccionado) {
 	list<cPaciente*>::iterator itDonantes;
-	for (itDonantes = lista_donantes.begin(); itDonantes != lista_donantes.end(); ++itDonantes) {
+	for (itDonantes = lista_donantes.begin(); itDonantes != lista_donantes.end(); itDonantes++) {
 		cDonante* donante = dynamic_cast<cDonante*>(*itDonantes);
 		if (donante != nullptr)
 			return donante;
@@ -139,7 +139,7 @@ cDonante* cBSA::buscar_donante_compatibles(list<cPaciente*>& lista_donantes, cDo
 
 cDonante* cBSA::buscar_donante_compatibles_sangre(list<cPaciente*>& lista_donantes, cDonante* donante_seleccionado, cReceptor* receptor_seleccionado) {
 	list<cPaciente*>::iterator itDonantes;
-	for (itDonantes = lista_donantes.begin(); itDonantes != lista_donantes.end(); ++itDonantes) {
+	for (itDonantes = lista_donantes.begin(); itDonantes != lista_donantes.end(); itDonantes++) {
 		cDonante* donante = dynamic_cast<cDonante*>(*itDonantes);
 		if (donante != nullptr && verificar_compatibilidad_sangre(receptor_seleccionado, donante_seleccionado))
 			return donante;
@@ -188,15 +188,28 @@ bool  cBSA::verificar_compatibilidad_sangre(cReceptor* receptor_seleccionado, cD
 	return false;
 }
 
-bool cBSA::protocolo_transplante_inicio(cReceptor* receptor_seleccionado, cDonante* donante_seleccionado) {
+bool cBSA::protocolo_transplante_inicio(cReceptor* receptor_seleccionado, cDonante* donante_seleccionado, list<cPaciente*>& lista_donantes) {
 	if (receptor_seleccionado->getprovincia() == donante_seleccionado->getprovincia() && receptor_seleccionado->getpartido() == donante_seleccionado->getpartido()) {
 		cCentro_de_salud centro;
-		centro.protocolo_de_transplante_final(receptor_seleccionado, donante_seleccionado);
+		centro.protocolo_de_transplante_final(receptor_seleccionado, donante_seleccionado,receptores,lista_donantes);
 		return true;
 	}
 	else return false;
 }
+list<cReceptor*>& cBSA :: get_receptores() {
+	return this->receptores;
+}
+list<cPaciente*>&cBSA::get_recp_y_don_plasma(){
+	return this->recp_y_don_plasma;
+}
 
+list<cPaciente*>& cBSA::get_recp_y_don_sangre() {
+	return this->recp_y_don_sangre;
+}
+
+list<cPaciente*>& cBSA::get_recp_y_don_medula_osea(){
+	return this->recp_y_don_medula_osea;
+}
 cBSA::~cBSA(){
 }
 

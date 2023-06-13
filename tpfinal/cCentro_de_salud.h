@@ -23,7 +23,9 @@ public:
 	string get_nombre();
 	void set_pacientes_del_centro(list<cPaciente*>& pacientes);
 	list<cPaciente*> get_pacientes_del_centro();
-	 void protocolo_de_transplante_final(cReceptor* receptor_seleccionado, cDonante* donante_seleccionado);
+	 void protocolo_de_transplante_final(cReceptor* receptor_seleccionado, cDonante* donante_seleccionado, list<cReceptor*>& receptores, list<cPaciente*>& lista_de_fluido);
 	 friend class cBSA;
 	 cCentro_de_salud();
 };
+double tiempo_organos(tm fecha);//para tiempo de organos
+int consrandom();

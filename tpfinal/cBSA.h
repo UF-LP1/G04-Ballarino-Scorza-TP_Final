@@ -39,7 +39,11 @@ public:
 	cDonante* buscar_donante_compatibles(list<cPaciente*>& lista_donantes, cDonante* donante_seleccionado);
 	cDonante* buscar_donante_compatibles_sangre(list<cPaciente*>& lista_donantes, cDonante* donante_seleccionado, cReceptor* receptor_seleccionado);
 	bool verificar_compatibilidad_sangre(cReceptor* receptor_seleccionado, cDonante* donante_seleccionado);
-	bool protocolo_transplante_inicio(cReceptor* receptor_seleccionado, cDonante* donante_seleccionado);
+	bool protocolo_transplante_inicio(cReceptor* receptor_seleccionado, cDonante* donante_seleccionado, list<cPaciente*>& lista_donantes);//le paso la lista, porque esta asu vez se la paso a protocolo f inal, que eliminara el paciente de la lista general de receptores y de la lista especifica de cada fluido
+	list<cReceptor*>& get_receptores();
+	list<cPaciente*>& get_recp_y_don_plasma();
+	list<cPaciente*>& get_recp_y_don_sangre();
+	list<cPaciente*>& get_recp_y_don_medula_osea();
 	~cBSA();
 
 };
