@@ -5,6 +5,8 @@
 #include<list>
 #include "cDonante.h"
 #include"cReceptor.h"
+#include<algorithm>
+
 using namespace std;
 class cBsa;
 class cCentro_de_salud {
@@ -21,9 +23,10 @@ public:
 	~cCentro_de_salud();
 	void set_nombre(string &nombre);
 	string get_nombre();
-	void set_pacientes_del_centro(list<cPaciente*>& pacientes);
+	void set_pacientes_del_centro(list<cPaciente*>& pacientes);//AGREGO PACIENTES A LA LISTA
+	void agregar_pac( cPaciente* nuevoPaciente);
 	list<cPaciente*> get_pacientes_del_centro();
-	 void protocolo_de_transplante_final(cReceptor* receptor_seleccionado, cDonante* donante_seleccionado, list<cReceptor*>& receptores, list<cPaciente*>& lista_de_fluido);
+	 void protocolo_de_transplante_final(cReceptor* receptor_seleccionado, cDonante* donante_seleccionado);
 	 friend class cBSA;
 	 cCentro_de_salud();
 };

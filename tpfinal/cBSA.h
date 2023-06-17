@@ -14,9 +14,6 @@ class cBSA {
 private:
 
 	list<cReceptor*> receptores;
-	list<cPaciente*>recp_y_don_plasma;
-    list<cPaciente*>recp_y_don_sangre;
-    list<cPaciente*>recp_y_don_medula_osea;
 	list<cDonante*> donantes;
 	list<cCentro_de_salud*> centros_de_salud;
 	
@@ -31,21 +28,20 @@ public:
 	*/
 	void set_receptores_y_donantes();//IMPORTANTE REMARCAR QUE EL SET NO RECIBE NADA YA QUE SE CARGAN A PARTIR DEL ATRIBUTO CENTRO DE SALUD
 	//QUE YA ESTA CONTENIDO EN LA CLASE, ESTE TIENE SUS LISTAS DE PACIENTES
-	void separar_segun_fluido(list<cReceptor*> receptores, list<cDonante*> donantes);
+	list<cPaciente*>& separar_segun_fluido(cDonante* donante);
 	
-	cReceptor* match(string& fluido);//LA IDEA ES QUE EL BANCO DE SANGRE SELECCIOENE EL FLUIDO QUE QUIERA HACER EL MATCH
-
-	cReceptor* receptor_prioridad(list<cPaciente*>& lista_receptores, cReceptor* receptor_seleccionado);// ESTOS CUATRO METODOS SON PARA EL MATCH, RECORREN,BUSCAN, POR CONDICIONES
-	cDonante* buscar_donante_compatibles(list<cPaciente*>& lista_donantes, cDonante* donante_seleccionado);
-	cDonante* buscar_donante_compatibles_sangre(list<cPaciente*>& lista_donantes, cDonante* donante_seleccionado, cReceptor* receptor_seleccionado);
+	cReceptor* match(cDonante* donante);//LA IDEA ES ENCONTRAR UN RECPTOR AL DONANTE
+	list<cPaciente*>& ordenar_por_prioridad(list<cPaciente*>& listafluido_recp);//Ordena por prioridad
+	cReceptor* buscar_receptor_compatibles_sangre(cDonante* donante_seleccionado, list<cPaciente*>& listafluido_recp);
 	bool verificar_compatibilidad_sangre(cReceptor* receptor_seleccionado, cDonante* donante_seleccionado);
-	bool protocolo_transplante_inicio(cReceptor* receptor_seleccionado, cDonante* donante_seleccionado, list<cPaciente*>& lista_donantes);//le paso la lista, porque esta asu vez se la paso a protocolo f inal, que eliminara el paciente de la lista general de receptores y de la lista especifica de cada fluido
+	bool protocolo_transplante_inicio(cReceptor* receptor_seleccionado, cDonante* donante_seleccionado);
 	list<cReceptor*>& get_receptores();
-	list<cPaciente*>& get_recp_y_don_plasma();
-	list<cPaciente*>& get_recp_y_don_sangre();
-	list<cPaciente*>& get_recp_y_don_medula_osea();
+	
+	list <cReceptor*>& buscar_centro_de_salud(string centro_de_salud);//devuelve el nombre de los pacientes de la lista de espera junto a su respectivo centro
+	void buscar_la_prioridad(cReceptor* receptor);
 	~cBSA();
 
 };
 double distancia_fechas(tm fecha);//LA USAMOS PARA COMPARAR LAS DISTANCIAS RESPECTO A LA FECHA DE HOY, COMO LA EDAD, FECHAS DE INGRESO.
 tm setear_fecha_ingreso_espera();//	SETEO LA FECHA DE INGRESO CON LA FECHA DE HOY, EN EL SENTIDO QUE SERIA EL DIA QUE LLEGO
+

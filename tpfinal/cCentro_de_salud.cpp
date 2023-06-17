@@ -21,7 +21,7 @@ void cCentro_de_salud::set_pacientes_del_centro(list<cPaciente*>& pacientes) {
 	while (it != pacientes.end()) {
 		if ((*it)->get_centro_salud() == this->nombre) {
 			pacientes_del_centro.push_back(*it);// CADA CENTRO DE SALUD TENDRA SU PROPIA LISTA DE PACIENTES
-			(*it)->set_partido(this->partido);
+			(*it)->set_partido(this->partido);//seteamos la provincia y el partido del paciente
 			(*it)->set_provincia(this->provincia);
 		}
 
@@ -31,7 +31,15 @@ void cCentro_de_salud::set_pacientes_del_centro(list<cPaciente*>& pacientes) {
 list<cPaciente*> cCentro_de_salud::get_pacientes_del_centro() {
 	return this->pacientes_del_centro;
 }
-void cCentro_de_salud::protocolo_de_transplante_final(cReceptor* receptor_seleccionado, cDonante* donante_seleccionado, list<cReceptor*>& receptores, list<cPaciente*>& lista_de_fluido) {
+void cCentro_de_salud:: agregar_pac(cPaciente* nuevoPaciente) {//
+	list<cPaciente*>::iterator it = pacientes_del_centro.begin();
+	int cantidad = count(it, pacientes_del_centro.end(), nuevoPaciente);//count devuelve la cantidad de veces que se repite un lo que le pasas
+	if (cantidad == 1)
+	{
+		pacientes_del_centro.push_back((nuevoPaciente));
+	}
+}
+void cCentro_de_salud::protocolo_de_transplante_final(cReceptor* receptor_seleccionado, cDonante* donante_seleccionado) {
 	
 	if(donante_seleccionado->getFluido() == "Plasma" && (tiempo_organos(donante_seleccionado->get_fecha_de_donacion()) < (86400 * 365.25) ||
 		donante_seleccionado->getFluido() == "Medula osea" && tiempo_organos(donante_seleccionado->get_fecha_de_donacion()) < 86400 ||
@@ -63,7 +71,9 @@ void cCentro_de_salud::protocolo_de_transplante_final(cReceptor* receptor_selecc
 			
 		}
 		else if (exito == 1) {
-
+			unsigned int maxprio = 5;
+			receptor_seleccionado->set_prioridad(maxprio);
+			receptor_seleccionado->set_estado(cReceptor::estado::inestable);
 		}
 	}
 

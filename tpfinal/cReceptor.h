@@ -15,6 +15,7 @@ public:
 	void setFluido(string& fluido_elegido) override;
 	void set_prioridad(unsigned int &prioridad);
 	unsigned int get_prioridad();
+	void set_estado(estado estado_pac);
 	estado get_estado();
 	void set_fecha_agregado_espera(tm fecha_agregado_espera);
 	tm get_fecha_agregado_espera();

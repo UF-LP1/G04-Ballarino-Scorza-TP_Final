@@ -14,6 +14,9 @@ void cReceptor::set_prioridad(unsigned int &prioridad) {
 unsigned int cReceptor::get_prioridad() {
 	return this->prioridad;
 }
+void cReceptor::set_estado(estado estado_pac) {
+	this->estado_pac = estado_pac;
+}
 enum class cReceptor::estado cReceptor::get_estado() {
 	return this->estado_pac;
 }
