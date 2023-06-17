@@ -11,7 +11,7 @@ private:
 	unsigned int prioridad;
 	estado estado_pac;
 public:
-	cReceptor(string nombre, tm fechanac, char sexo, string peso, string tipos_sangre, string centro_salud, string rh, string fluido_elegido, string partido, string provincia, tm fecha_agregado_espera, unsigned int prioridad, estado estado_pac);
+	cReceptor(const string id,string nombre, tm fechanac, char sexo, string peso, string tipos_sangre, string centro_salud, string rh, string fluido_elegido, string partido, string provincia, tm fecha_agregado_espera, unsigned int prioridad, estado estado_pac);
 	void setFluido(string& fluido_elegido) override;
 	void set_prioridad(unsigned int &prioridad);
 	unsigned int get_prioridad();

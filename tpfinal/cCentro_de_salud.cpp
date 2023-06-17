@@ -31,15 +31,8 @@ void cCentro_de_salud::set_pacientes_del_centro(list<cPaciente*>& pacientes) {
 list<cPaciente*> cCentro_de_salud::get_pacientes_del_centro() {
 	return this->pacientes_del_centro;
 }
-void cCentro_de_salud:: agregar_pac(cPaciente* nuevoPaciente) {//
-	list<cPaciente*>::iterator it = pacientes_del_centro.begin();
-	int cantidad = count(it, pacientes_del_centro.end(), nuevoPaciente);//count devuelve la cantidad de veces que se repite un lo que le pasas
-	if (cantidad == 1)
-	{
-		pacientes_del_centro.push_back((nuevoPaciente));
-	}
-}
-void cCentro_de_salud::protocolo_de_transplante_final(cReceptor* receptor_seleccionado, cDonante* donante_seleccionado) {
+
+void cCentro_de_salud::protocolo_de_transplante_final(cReceptor* receptor_seleccionado, cDonante* donante_seleccionado, list<cReceptor*> receptores) {
 	
 	if(donante_seleccionado->getFluido() == "Plasma" && (tiempo_organos(donante_seleccionado->get_fecha_de_donacion()) < (86400 * 365.25) ||
 		donante_seleccionado->getFluido() == "Medula osea" && tiempo_organos(donante_seleccionado->get_fecha_de_donacion()) < 86400 ||
@@ -47,32 +40,11 @@ void cCentro_de_salud::protocolo_de_transplante_final(cReceptor* receptor_selecc
 //condicion para el trasplante, determinamos si es existoso con random equiprobable
 		int exito = consrandom();//SI ES 2 ES EXITOSO, SI ES 1 HUBO COMPLICACIONES
 		if (exito == 2) {
-			list<cReceptor*>::iterator it;
-			it = receptores.begin();
-			while (it != receptores.end()) {
-				if (*it == receptor_seleccionado) {
-					delete* it;
-					receptores.erase(it);//borro elemento de la lista
-					break;
-				}
-				it++;
-			}
-			list<cPaciente*>::iterator it2;
-			it2 = lista_de_fluido.begin();
-			while (it2 != lista_de_fluido.end()) {
-				cReceptor* receptor = dynamic_cast<cReceptor*>(*it2);
-				if (receptor != nullptr && *it2 == receptor_seleccionado) {
-					delete* it2;
-					lista_de_fluido.erase(it2);//borro elemento de la lista
-					break;
-				}
-				it2++;
-			}
-			
+			receptores - receptor_seleccionado;
 		}
 		else if (exito == 1) {
-			unsigned int maxprio = 5;
-			receptor_seleccionado->set_prioridad(maxprio);
+			unsigned int maxprioridad = 5;
+			receptor_seleccionado->set_prioridad(maxprioridad);
 			receptor_seleccionado->set_estado(cReceptor::estado::inestable);
 		}
 	}
@@ -105,3 +77,12 @@ double tiempo_organos(tm fecha) {//DEVOLVERA DIFERENCIA DE HOY EN SEGUNDOS
 	return valor;
 
 }
+ list<cReceptor*> operator-(list<cReceptor*> receptores, cReceptor* receptor_seleccionado) {
+	 list<cReceptor*>::iterator it;
+	 for (it = receptores.begin(); it != receptores.end(); it++) {
+		 if ((*it)->get_id() == receptor_seleccionado->get_id()) {
+			 receptores.remove(*it);
+		 }
+	 }
+	 return receptores;
+ }

@@ -37,11 +37,10 @@ public:
 	bool protocolo_transplante_inicio(cReceptor* receptor_seleccionado, cDonante* donante_seleccionado);
 	list<cReceptor*>& get_receptores();
 	
-	list <cReceptor*>& buscar_centro_de_salud(string centro_de_salud);//devuelve el nombre de los pacientes de la lista de espera junto a su respectivo centro
-	void buscar_la_prioridad(cReceptor* receptor);
+	
 	~cBSA();
 
 };
 double distancia_fechas(tm fecha);//LA USAMOS PARA COMPARAR LAS DISTANCIAS RESPECTO A LA FECHA DE HOY, COMO LA EDAD, FECHAS DE INGRESO.
 tm setear_fecha_ingreso_espera();//	SETEO LA FECHA DE INGRESO CON LA FECHA DE HOY, EN EL SENTIDO QUE SERIA EL DIA QUE LLEGO
-
+bool operator==(cReceptor* receptor, cDonante* donante);

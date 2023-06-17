@@ -14,6 +14,7 @@ class cCentro_de_salud;/* no se puede agregar al encabezado #include cCentro_de_
 
 class cPaciente {
 protected:
+	const string id;
 	string nombre;
 	tm fechanac;
 	char sexo;
@@ -26,7 +27,7 @@ protected:
 	string partido;
 	string provincia;
 public:
-	cPaciente(string nombre,tm fechanac, char sexo, string peso, string tipos_sangre, string centro_salud,string rh, string fluido_elegido, string partido, string provincia);
+	cPaciente(const string id,string nombre,tm fechanac, char sexo, string peso, string tipos_sangre, string centro_salud,string rh, string fluido_elegido, string partido, string provincia);
 	
 	void set_tipo_de_Sangre_y_rh(cFluido& fluido);//HACEMOS UN SET DE LOS DOS, YA QUE EN LA VIDA REAL CUANDO SE INDICA LAS SABRE SE INDICA A PARTIR DEL TIPO Y DEL FACTOR RH
 	string get_tipos_sangre();
@@ -45,5 +46,6 @@ public:
 	void set_partido(string& partido);
 	string getprovincia();
 	void set_provincia(string& provincia);
+	string get_id();
 	~cPaciente();
 };

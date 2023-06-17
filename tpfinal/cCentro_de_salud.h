@@ -6,9 +6,10 @@
 #include "cDonante.h"
 #include"cReceptor.h"
 #include<algorithm>
+#include "cBSA.h"
 
 using namespace std;
-class cBsa;
+class cBSA;
 class cCentro_de_salud {
 private:
 	string nombre;
@@ -24,11 +25,11 @@ public:
 	void set_nombre(string &nombre);
 	string get_nombre();
 	void set_pacientes_del_centro(list<cPaciente*>& pacientes);//AGREGO PACIENTES A LA LISTA
-	void agregar_pac( cPaciente* nuevoPaciente);
 	list<cPaciente*> get_pacientes_del_centro();
-	 void protocolo_de_transplante_final(cReceptor* receptor_seleccionado, cDonante* donante_seleccionado);
+	 void protocolo_de_transplante_final(cReceptor* receptor_seleccionado, cDonante* donante_seleccionado, list<cReceptor*> receptores);
 	 friend class cBSA;
 	 cCentro_de_salud();
 };
 double tiempo_organos(tm fecha);//para tiempo de organos
 int consrandom();
+list<cReceptor*> operator-(list<cReceptor*> receptores, cReceptor* receptor_seleccionado);

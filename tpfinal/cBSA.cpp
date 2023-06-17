@@ -49,7 +49,7 @@ list<cPaciente*>& cBSA::separar_segun_fluido(cDonante* donante) {
 		list<cReceptor*>::iterator it;
 		list<cPaciente*> listafluido_recp;
 		for (it = receptores.begin(); it != receptores.end(); it++) {
-			if ((*it)->getFluido() == donante->getFluido()) {      //ESTE METODO RECORRE LA LISTA DE RECEPTORES Y DEVUELVE CON LOS RECEPTORES DE ESE FLUIDO
+			if ((*it)==donante) {      //ESTE METODO RECORRE LA LISTA DE RECEPTORES Y DEVUELVE CON LOS RECEPTORES DE ESE FLUIDO
 				listafluido_recp.push_back((*it));
 			}
 		}
@@ -160,7 +160,7 @@ bool  cBSA::verificar_compatibilidad_sangre(cReceptor* receptor_seleccionado, cD
 bool cBSA::protocolo_transplante_inicio(cReceptor* receptor_seleccionado, cDonante* donante_seleccionado) {
 	if (receptor_seleccionado->getprovincia() == donante_seleccionado->getprovincia() && receptor_seleccionado->getpartido() == donante_seleccionado->getpartido()) {
 		cCentro_de_salud centro;
-		centro.protocolo_de_transplante_final(receptor_seleccionado, donante_seleccionado);
+		centro.protocolo_de_transplante_final(receptor_seleccionado, donante_seleccionado,receptores);
 		return true;
 	}
 	else return false;
@@ -198,3 +198,9 @@ tm setear_fecha_ingreso_espera() {
 	return hoy_;
 }
 
+bool operator==(cReceptor* receptor, cDonante* donante) {
+	if (receptor->getFluido() == donante->getFluido()) {
+		return true;
+	}
+	return false;
+}
