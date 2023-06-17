@@ -6,7 +6,7 @@ cCentro_de_salud::cCentro_de_salud(string nombre, string partido, string provinc
 	this->provincia = provincia;
 	this->direccion = direccion;
 	this->telefono = telefono;
-
+	srand(time(NULL));
 }
 void cCentro_de_salud::set_nombre(string &nombre) {
 	this->nombre = nombre;
@@ -27,7 +27,7 @@ void cCentro_de_salud::set_pacientes_del_centro(list<cPaciente*>& pacientes) {
 
 		it++;
 	}
-}
+}//desde el main
 list<cPaciente*> cCentro_de_salud::get_pacientes_del_centro() {
 	return this->pacientes_del_centro;
 }
@@ -40,7 +40,7 @@ void cCentro_de_salud::protocolo_de_transplante_final(cReceptor* receptor_selecc
 //condicion para el trasplante, determinamos si es existoso con random equiprobable
 		int exito = consrandom();//SI ES 2 ES EXITOSO, SI ES 1 HUBO COMPLICACIONES
 		if (exito == 2) {
-			receptores - receptor_seleccionado;
+			receptores= receptores - receptor_seleccionado;//SOBRECARGA DE-
 		}
 		else if (exito == 1) {
 			unsigned int maxprioridad = 5;
@@ -49,6 +49,14 @@ void cCentro_de_salud::protocolo_de_transplante_final(cReceptor* receptor_selecc
 		}
 	}
 
+}
+
+
+void cCentro_de_salud::agregar_paciente(cPaciente* paciente) {
+	if (this->pacientes_del_centro == paciente)//este igual estara sobrecargado y devuelve true si esta
+		return;
+	else
+		this->pacientes_del_centro=	this->pacientes_del_centro + paciente;
 }
 cCentro_de_salud::cCentro_de_salud() {
 
@@ -72,17 +80,41 @@ double tiempo_organos(tm fecha) {//DEVOLVERA DIFERENCIA DE HOY EN SEGUNDOS
 
  int consrandom()
 {
-	srand(time(NULL));
+	
 	 int valor = rand() % (2 - 1) + 1;
 	return valor;
 
 }
+ 
  list<cReceptor*> operator-(list<cReceptor*> receptores, cReceptor* receptor_seleccionado) {
-	 list<cReceptor*>::iterator it;
-	 for (it = receptores.begin(); it != receptores.end(); it++) {
+	 list<cReceptor*>::iterator it = receptores.begin();
+
+	 while (it != receptores.end()) {
 		 if ((*it)->get_id() == receptor_seleccionado->get_id()) {
-			 receptores.remove(*it);
+			 it = receptores.erase(it);
+		 }
+		 else {
+			 it++;
 		 }
 	 }
+
 	 return receptores;
+ }
+ bool operator==(list<cPaciente*> pacientes, cPaciente* paciente) {//devuelve true si esta en la lista
+	 list<cPaciente*>::iterator it = pacientes.begin();
+
+	 while (it != pacientes.end()) {
+		 if ((*it)->get_id() == paciente->get_id()) {
+			 return true;
+		 }
+		 else {
+			 it++;
+		 }
+	 }
+
+	 return false;
+ }
+ list<cPaciente*> operator+(list<cPaciente*> pacientes, cPaciente* paciente) {
+	 pacientes.push_back(paciente);//chequea arriba si esta
+	 return pacientes;
  }

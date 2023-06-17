@@ -84,5 +84,11 @@ void cPaciente::set_provincia(string& provincia) {
 string cPaciente::get_id() {
     return this->id;
 }
+void cPaciente::set_nombre(string& nombre) {
+    this->nombre = nombre;
+}
+string cPaciente::get_nombre() {
+    return this->nombre;
+}
 cPaciente::~cPaciente(){
 }

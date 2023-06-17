@@ -47,5 +47,7 @@ public:
 	string getprovincia();
 	void set_provincia(string& provincia);
 	string get_id();
+	void set_nombre(string& nombre);
+	string get_nombre();
 	~cPaciente();
 };

@@ -2,21 +2,24 @@
 #include <string>
 #include<iostream>
 #include <list>
+#include<sstream>
 using namespace std;
 #include"cPaciente.h"
 #include "cReceptor.h"
 #include "CDonante.h"
 #include "cCentro_de_salud.h"
 
-
-
+struct DonacionesProvincia {
+	string provincia;
+	int cantidad;
+};
 class cBSA {
 private:
 
 	list<cReceptor*> receptores;
 	list<cDonante*> donantes;
 	list<cCentro_de_salud*> centros_de_salud;
-	
+	list<DonacionesProvincia*> donacionesPorProvincia;
 	
 public:
 	cBSA(list<cReceptor*> receptores, list<cDonante*> donantes, list<cCentro_de_salud*> centros_de_salud);
@@ -36,11 +39,15 @@ public:
 	bool verificar_compatibilidad_sangre(cReceptor* receptor_seleccionado, cDonante* donante_seleccionado);
 	bool protocolo_transplante_inicio(cReceptor* receptor_seleccionado, cDonante* donante_seleccionado);
 	list<cReceptor*>& get_receptores();
-	
-	
+	list<cReceptor*> receptores_de_un_centro(string centro_de_salud);
+	unsigned int prioridad_de_receptor(cReceptor* receptor_seleccionado);
+	string to_string();
+	void imprimir(cBSA* cbsa);
+	friend ostream& operator <<(ostream& out, cBSA* bsa);
+	void generarInformeDonacionesPorProvincia();
 	~cBSA();
 
 };
 double distancia_fechas(tm fecha);//LA USAMOS PARA COMPARAR LAS DISTANCIAS RESPECTO A LA FECHA DE HOY, COMO LA EDAD, FECHAS DE INGRESO.
 tm setear_fecha_ingreso_espera();//	SETEO LA FECHA DE INGRESO CON LA FECHA DE HOY, EN EL SENTIDO QUE SERIA EL DIA QUE LLEGO
-bool operator==(cReceptor* receptor, cDonante* donante);
+bool operator==(cReceptor& receptor,cDonante& donante);

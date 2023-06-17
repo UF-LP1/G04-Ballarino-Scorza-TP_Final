@@ -48,8 +48,8 @@ void cBSA::set_receptores_y_donantes()
 list<cPaciente*>& cBSA::separar_segun_fluido(cDonante* donante) {
 		list<cReceptor*>::iterator it;
 		list<cPaciente*> listafluido_recp;
-		for (it = receptores.begin(); it != receptores.end(); it++) {
-			if ((*it)==donante) {      //ESTE METODO RECORRE LA LISTA DE RECEPTORES Y DEVUELVE CON LOS RECEPTORES DE ESE FLUIDO
+		for (it = receptores.begin(); it != receptores.end(); it++) {//ESTE METODO RECORRE LA LISTA DE RECEPTORES Y DEVUELVE CON LOS RECEPTORES DE ESE FLUIDO
+			if (*(*it) == *donante) {  //SOBRECARGA DE OPERDOR == 
 				listafluido_recp.push_back((*it));
 			}
 		}
@@ -160,16 +160,122 @@ bool  cBSA::verificar_compatibilidad_sangre(cReceptor* receptor_seleccionado, cD
 bool cBSA::protocolo_transplante_inicio(cReceptor* receptor_seleccionado, cDonante* donante_seleccionado) {
 	if (receptor_seleccionado->getprovincia() == donante_seleccionado->getprovincia() && receptor_seleccionado->getpartido() == donante_seleccionado->getpartido()) {
 		cCentro_de_salud centro;
-		centro.protocolo_de_transplante_final(receptor_seleccionado, donante_seleccionado,receptores);
-		return true;
+		centro.protocolo_de_transplante_final(receptor_seleccionado, donante_seleccionado, receptores);
+
+		// Incrementar el contador de donaciones para la provincia correspondiente
+		//por mas de que haya habido complicaciones, nosotros contamos las donaciones
+		string provincia = receptor_seleccionado->getprovincia();
+		list<DonacionesProvincia*>::iterator it = donacionesPorProvincia.begin();
+		while (it != donacionesPorProvincia.end()) {
+			if ((*it)->provincia == provincia) {
+				// La provincia ya existe en la lista, incrementar el contador
+				((*it)->cantidad)++;
+				return true;
+			}
+			it++;
+		}
+		if (it == donacionesPorProvincia.end()) {
+			// La provincia no existe en la lista, agregar una nueva entrada con valor 1
+			donacionesPorProvincia.push_back(new DonacionesProvincia{ provincia, 1 });
+		}
+		return false;
 	}
-	else return false;
+	else {
+		return false;
+	}
 }
 list<cReceptor*>& cBSA :: get_receptores() {
 	return this->receptores;
 }
+list<cReceptor*> cBSA::receptores_de_un_centro(string centro_de_salud) {
+	list<cReceptor*>::iterator it;
+	list<cReceptor*> receptores_de_ese_centro;
 
+	for (it = receptores.begin(); it != receptores.end(); it++) {
+		if ((*it)->get_centro_salud() == centro_de_salud) {
+			receptores_de_ese_centro.push_back(*it);
+		}
+	}
 
+	return receptores_de_ese_centro;
+}
+unsigned int cBSA::prioridad_de_receptor(cReceptor* receptor_seleccionado) {
+	list<cReceptor*>::iterator it = receptores.begin();
+
+	while (it != receptores.end()) {
+		if ((*it)->get_id() == receptor_seleccionado->get_id()) {
+		return (receptor_seleccionado->get_prioridad());
+		}
+		else {
+			it++;
+		}
+	}
+
+	return 0;
+}
+string cBSA::to_string() {
+	stringstream s;
+	s << " Receptores de BSA:" << endl << endl;
+	for (list<cReceptor*>::iterator it = receptores.begin(); it != receptores.end(); it++) {
+		s << "nombre:" << (*it)->get_nombre() << " ,con id:" << (*it)->get_id() << ",quiere recibir " << (*it)->getFluido() << " y con prioridad " << (*it)->get_prioridad() << " ." << endl;
+	}
+	s << endl << endl;
+	s << "Donantes de BSA:" << endl << endl;
+	for (list<cDonante*>::iterator it = donantes.begin(); it != donantes.end(); it++) {
+		s << "nombre:" << (*it)->get_nombre() << " ,con id:" << (*it)->get_id() << ",quiere donar " << (*it)->getFluido() << endl;
+	}
+	return s.str();
+}
+void cBSA::imprimir(cBSA* cbsa) {
+	cout << cbsa;//SOBRECARGAMOS OPERADOR
+}
+
+void cBSA::generarInformeDonacionesPorProvincia() {
+	list<string> nombresProvincias = {
+		"Buenos Aires", "Catamarca", "Chaco", "Chubut", "Córdoba", "Corrientes",
+		"Entre Ríos", "Formosa", "Jujuy", "La Pampa", "La Rioja", "Mendoza",
+		"Misiones", "Neuquén", "Río Negro", "Salta", "San Juan", "San Luis",
+		"Santa Cruz", "Santa Fe", "Santiago del Estero", "Tierra del Fuego",
+		"Tucumán"
+	};
+
+	cout << "Informe de Donaciones por Provincia - [Mes, Año]" << endl;
+
+	list<DonacionesProvincia*>::iterator it = donacionesPorProvincia.begin();
+	for (list<string>::iterator provinciait = nombresProvincias.begin(); provinciait != nombresProvincias.end(); provinciait++) {
+		 string& provincia = *provinciait;
+
+		cout << "Provincia de " << provincia << ":" << endl;
+
+		for (int mes = 0; mes < 12; mes++) {
+			string nombreMes;
+
+			switch (mes) {
+			case 0: nombreMes = "Enero"; break;
+			case 1: nombreMes = "Febrero"; break;
+			case 2: nombreMes = "Marzo"; break;
+			case 3: nombreMes = "Abril"; break;
+			case 4: nombreMes = "Mayo"; break;
+			case 5: nombreMes = "Junio"; break;
+			case 6: nombreMes = "Julio"; break;
+			case 7: nombreMes = "Agosto"; break;
+			case 8: nombreMes = "Septiembre"; break;
+			case 9: nombreMes = "Octubre"; break;
+			case 10: nombreMes = "Noviembre"; break;
+			case 11: nombreMes = "Diciembre"; break;
+			}
+
+			int cantidadDonaciones = 0;
+			if (it != donacionesPorProvincia.end() && (*it)->provincia == provincia) {
+				cantidadDonaciones = (*it)->cantidad;
+				++it;
+			}
+
+			cout << nombreMes << ": " << cantidadDonaciones << " donaciones" << endl;
+		}
+
+	}
+}
 
 
 cBSA::~cBSA(){
@@ -198,9 +304,10 @@ tm setear_fecha_ingreso_espera() {
 	return hoy_;
 }
 
-bool operator==(cReceptor* receptor, cDonante* donante) {
-	if (receptor->getFluido() == donante->getFluido()) {
-		return true;
-	}
-	return false;
+bool operator==( cReceptor& receptor,cDonante& donante) {
+	return receptor.getFluido() == donante.getFluido();
+}
+ostream& operator <<(ostream& out, cBSA* bsa) {
+	out << bsa->to_string();
+	return out;
 }

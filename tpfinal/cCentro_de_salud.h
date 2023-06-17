@@ -7,7 +7,7 @@
 #include"cReceptor.h"
 #include<algorithm>
 #include "cBSA.h"
-
+#include <cstdlib>
 using namespace std;
 class cBSA;
 class cCentro_de_salud {
@@ -27,9 +27,13 @@ public:
 	void set_pacientes_del_centro(list<cPaciente*>& pacientes);//AGREGO PACIENTES A LA LISTA
 	list<cPaciente*> get_pacientes_del_centro();
 	 void protocolo_de_transplante_final(cReceptor* receptor_seleccionado, cDonante* donante_seleccionado, list<cReceptor*> receptores);
+	 void agregar_paciente(cPaciente* paciente);//AGREGO PACIENTE AL CENTRO
 	 friend class cBSA;
 	 cCentro_de_salud();
 };
 double tiempo_organos(tm fecha);//para tiempo de organos
 int consrandom();
+
 list<cReceptor*> operator-(list<cReceptor*> receptores, cReceptor* receptor_seleccionado);
+bool operator==(list<cPaciente*> pacientes, cPaciente* paciente);
+list<cPaciente*> operator+(list<cPaciente*> pacientes, cPaciente* paciente);
