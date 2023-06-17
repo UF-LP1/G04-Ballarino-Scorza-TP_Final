@@ -7,5 +7,6 @@ private:
 public:
 	cPlasma(string estado, string tipo_de_plasma);
 	string getTipoFluido() override;
+	bool VerificarFechaMaxima(tm fecha) override;
 	~cPlasma();
 };

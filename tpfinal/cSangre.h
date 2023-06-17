@@ -13,5 +13,6 @@ public:
 	~cSangre();
 	tipo_d_sangre get_tipo_de_sangre();
 	string getTipoFluido() override;
+	bool VerificarFechaMaxima(tm fecha) override;
 	Rh get_rh();
 };

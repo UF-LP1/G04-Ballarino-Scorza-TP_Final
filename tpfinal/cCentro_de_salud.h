@@ -8,6 +8,8 @@
 #include<algorithm>
 #include "cBSA.h"
 #include <cstdlib>
+#include "cFluido.h"
+
 using namespace std;
 class cBSA;
 class cCentro_de_salud {
@@ -31,7 +33,7 @@ public:
 	 friend class cBSA;
 	 cCentro_de_salud();
 };
-double tiempo_organos(tm fecha);//para tiempo de organos
+
 int consrandom();
 
 list<cReceptor*> operator-(list<cReceptor*> receptores, cReceptor* receptor_seleccionado);
