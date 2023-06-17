@@ -9,4 +9,5 @@ public:
 	string getTipoFluido() override;//override, estás indicando de manera explícita que estás sobrescribiendo un método de la clase base
 	bool VerificarFechaMaxima(tm fecha) override;
 	~cMedula_osea();
+	cMedula_osea();
 };

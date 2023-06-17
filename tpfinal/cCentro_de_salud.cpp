@@ -6,6 +6,7 @@ cCentro_de_salud::cCentro_de_salud(string nombre, string partido, string provinc
 	this->provincia = provincia;
 	this->direccion = direccion;
 	this->telefono = telefono;
+
 	srand(time(NULL));
 }
 void cCentro_de_salud::set_nombre(string &nombre) {
@@ -33,12 +34,12 @@ list<cPaciente*> cCentro_de_salud::get_pacientes_del_centro() {
 }
 
 void cCentro_de_salud::protocolo_de_transplante_final(cReceptor* receptor_seleccionado, cDonante* donante_seleccionado, list<cReceptor*> receptores) {
-	cSangre *sangre;
-	cPlasma* plasma;
-	cMedula_osea *medula_osea;
-	if(donante_seleccionado->getFluido() == sangre->getTipoFluido() && sangre->VerificarFechaMaxima(donante_seleccionado->get_fecha_de_donacion())||
-		donante_seleccionado->getFluido() == plasma->getTipoFluido() && plasma->VerificarFechaMaxima(donante_seleccionado->get_fecha_de_donacion())||
-		donante_seleccionado->getFluido() == medula_osea->getTipoFluido() && medula_osea->VerificarFechaMaxima(donante_seleccionado->get_fecha_de_donacion()))
+	cSangre sangre;
+	cPlasma plasma;
+	cMedula_osea medula_osea;
+	if ((donante_seleccionado->getFluido() == sangre.getTipoFluido() && sangre.VerificarFechaMaxima(donante_seleccionado->get_fecha_de_donacion())) ||
+		(donante_seleccionado->getFluido() == plasma.getTipoFluido() && plasma.VerificarFechaMaxima(donante_seleccionado->get_fecha_de_donacion())) ||
+		(donante_seleccionado->getFluido() == medula_osea.getTipoFluido() && medula_osea.VerificarFechaMaxima(donante_seleccionado->get_fecha_de_donacion())))
 	{
 //condicion para el trasplante, determinamos si es existoso con random equiprobable
 		int exito = consrandom();//SI ES 2 ES EXITOSO, SI ES 1 HUBO COMPLICACIONES

@@ -20,4 +20,7 @@ bool cMedula_osea::VerificarFechaMaxima(tm fecha) {
 	else
 		return false;
 }
+cMedula_osea::cMedula_osea() :cFluido(estado) {
+
+}
 cMedula_osea::~cMedula_osea(){}

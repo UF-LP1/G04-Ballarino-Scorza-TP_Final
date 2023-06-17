@@ -9,4 +9,5 @@ public:
 	string getTipoFluido() override;
 	bool VerificarFechaMaxima(tm fecha) override;
 	~cPlasma();
+	cPlasma();
 };

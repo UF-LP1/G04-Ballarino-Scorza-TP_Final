@@ -25,4 +25,7 @@ bool cSangre:: VerificarFechaMaxima(tm fecha) {
 	else
 		return false;
 }
+cSangre::cSangre() :cFluido(estado) {
+
+}
 cSangre::~cSangre(){}

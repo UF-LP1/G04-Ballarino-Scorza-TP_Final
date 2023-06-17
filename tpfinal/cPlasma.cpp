@@ -20,4 +20,7 @@ bool cPlasma::VerificarFechaMaxima(tm fecha) {
 	else
 		return false;
 }
+cPlasma::cPlasma():cFluido(estado) {
+
+}
 cPlasma::~cPlasma(){}
