@@ -22,7 +22,7 @@ private:
 	list<cPaciente*> pacientes_del_centro;/* MI CENTRO VA A TENER SU PROPIA LISTA DE PACIENTES ASOCIADOS. ESTA SE VA A CARGAR DESDE EL MAIN,
 luego en un metodo vamoa a ir COMPARANDO LOS NOMBRES DE LOS CENTROS DE CADA PACIENTE,Luego esta nueva lista de paciente asociados,Se la vamos a pasar a mi centro de salud */
 public:
-	cCentro_de_salud(string nombre, string partido, string provincia, string direccion, list<cPaciente*> pacientes_del_centro, string telefono);
+	cCentro_de_salud(string nombre, string partido, string provincia, string direccion, string telefono);
 	~cCentro_de_salud();
 	void set_nombre(string &nombre);
 	string get_nombre();

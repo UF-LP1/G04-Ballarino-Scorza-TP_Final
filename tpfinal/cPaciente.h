@@ -29,13 +29,13 @@ protected:
 public:
 	cPaciente(const string id,string nombre,tm fechanac, char sexo, string peso, string tipos_sangre, string centro_salud,string rh, string fluido_elegido, string partido, string provincia);
 	
-	void set_tipo_de_Sangre_y_rh(cFluido& fluido);//HACEMOS UN SET DE LOS DOS, YA QUE EN LA VIDA REAL CUANDO SE INDICA LAS SABRE SE INDICA A PARTIR DEL TIPO Y DEL FACTOR RH
+	void set_tipo_de_Sangre_y_rh(cSangre* sangre);//HACEMOS UN SET DE LOS DOS, YA QUE EN LA VIDA REAL CUANDO SE INDICA LAS SABRE SE INDICA A PARTIR DEL TIPO Y DEL FACTOR RH
 	string get_tipos_sangre();
 	string get_rh();
-	virtual void set_centro_de_salud(string& centro_salud) = 0;
+	
 	virtual void setFluido(string& fluido_elegido) = 0;  //EL METODO ABSTRACTO QUE IMPLEMENTAREMOS VA A SER ELELGIR FLUIDO, POR UN LADO LOS RECEPTORES ELEGIRIAN QUE RECIBIR, Y LOS PACIENTES QUE DONAR
 	
-	void set_centro_salud(string &centro_salud);
+	void set_centro_saludd(string &centro_salud);
 	string get_centro_salud();
 	void set_peso(string &peso);
 	string get_peso();

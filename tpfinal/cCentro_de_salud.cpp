@@ -1,6 +1,6 @@
 #include "cCentro_de_salud.h"
 
-cCentro_de_salud::cCentro_de_salud(string nombre, string partido, string provincia, string direccion, list<cPaciente*> pacientes_del_centro, string telefono): pacientes_del_centro(pacientes_del_centro.begin(), pacientes_del_centro.end()) {
+cCentro_de_salud::cCentro_de_salud(string nombre, string partido, string provincia, string direccion, string telefono) {
 	this->nombre = nombre;
 	this->partido = partido;
 	this->provincia = provincia;

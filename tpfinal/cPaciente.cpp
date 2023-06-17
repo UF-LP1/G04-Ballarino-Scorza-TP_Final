@@ -12,9 +12,9 @@ cPaciente::cPaciente(const string id, string nombre, tm fechanac,char sexo, stri
     this->provincia = provincia;
     this->partido = partido;
 }
-void cPaciente:: set_tipo_de_Sangre_y_rh(cFluido& fluido) 
+void cPaciente:: set_tipo_de_Sangre_y_rh(cSangre* sangre) 
 {
-	cSangre* sangre = dynamic_cast< cSangre*>(&fluido);
+	
 	if(sangre!=NULL)
         switch (sangre->get_tipo_de_sangre()) {
         case cSangre::tipo_d_sangre ::A:
@@ -46,7 +46,7 @@ string cPaciente::get_tipos_sangre() {
 string cPaciente::get_rh() {
     return  this->rh;
 }
-void cPaciente::set_centro_salud(string &centro_salud) {
+void cPaciente::set_centro_saludd(string &centro_salud) {
     this->centro_salud = centro_salud;
 }
 string cPaciente::get_centro_salud() {

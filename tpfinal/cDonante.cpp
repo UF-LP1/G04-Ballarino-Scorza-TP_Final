@@ -1,6 +1,6 @@
 #include"cDonante.h"
 
-cDonante::cDonante(const string id,string nombre, tm fechanac, char sexo, string peso, string tipos_sangre, string centro_salud, string rh,string fluido_elegido ,list<cRegistro_don*>registro_de_donaciones,string partido,string provincia, bool enfermedades, bool tatuaje, bool donacion, tm fecha_de_donacion):registro_de_donaciones(registro_de_donaciones.begin(), registro_de_donaciones.end()),cPaciente(id, nombre, fechanac, sexo, peso, tipos_sangre, centro_salud,rh,fluido_elegido, partido, provincia) {
+cDonante::cDonante(const string id,string nombre, tm fechanac, char sexo, string peso, string tipos_sangre, string centro_salud, string rh,string fluido_elegido ,string partido,string provincia, bool enfermedades, bool tatuaje, bool donacion, tm fecha_de_donacion):cPaciente(id, nombre, fechanac, sexo, peso, tipos_sangre, centro_salud,rh,fluido_elegido, partido, provincia) {
 	this->enfermedades = enfermedades;
 	this->tatuaje = tatuaje;
 	this->donacion = donacion;
@@ -33,6 +33,19 @@ void cDonante:: set_fecha_de_donacion(tm fecha_de_donacion){
 tm cDonante::get_fecha_de_donacion() {
 	return this->fecha_de_donacion;
 }
+void cDonante:: set_registro_dedonaciones(list<cRegistro_don*> &registro) {
+	list<cRegistro_don*>::iterator it = registro.begin();
+
+	while (it != registro.end()) {
+		if ((*it)->get_nombre() == this->get_nombre()) {
+			registro_de_donaciones.push_back(*it);// cada donante tiene su propio lista de refgistro, que sale de la misma lista para todos los pacientes
+			
+		}
+
+		it++;
+	}
+}
+
 cDonante::~cDonante() {
 	
 }
