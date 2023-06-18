@@ -7,7 +7,7 @@ cCentro_de_salud::cCentro_de_salud(string nombre, string partido, string provinc
 	this->direccion = direccion;
 	this->telefono = telefono;
 
-	srand(time(NULL));
+
 }
 void cCentro_de_salud::set_nombre(string &nombre) {
 	this->nombre = nombre;
@@ -21,7 +21,8 @@ void cCentro_de_salud::set_pacientes_del_centro(list<cPaciente*>& pacientes) {//
 
 	while (it != pacientes.end()) {
 		if ((*it)->get_centro_salud() == this->nombre) {
-			pacientes_del_centro.push_back(*it);// CADA CENTRO DE SALUD TENDRA SU PROPIA LISTA DE PACIENTES
+			this->pacientes_del_centro + (*it);//ACA ESTA EL AGREGAR CON UN MAS
+			// CADA CENTRO DE SALUD TENDRA SU PROPIA LISTA DE PACIENTES
 			(*it)->set_partido(this->partido);//seteamos la provincia y el partido del paciente
 			(*it)->set_provincia(this->provincia);
 		}
@@ -44,7 +45,7 @@ void cCentro_de_salud::protocolo_de_transplante_final(cReceptor* receptor_selecc
 //condicion para el trasplante, determinamos si es existoso con random equiprobable
 		int exito = consrandom();//SI ES 2 ES EXITOSO, SI ES 1 HUBO COMPLICACIONES
 		if (exito == 2) {
-			receptores= receptores - receptor_seleccionado;//SOBRECARGA DE-
+			receptores - receptor_seleccionado;//SOBRECARGA DE-
 		}
 		else if (exito == 1) {
 			unsigned int maxprioridad = 5;
@@ -55,13 +56,6 @@ void cCentro_de_salud::protocolo_de_transplante_final(cReceptor* receptor_selecc
 
 }
 
-
-void cCentro_de_salud::agregar_paciente(cPaciente* paciente) {
-	if (this->pacientes_del_centro == paciente)//este igual estara sobrecargado y devuelve true si esta
-		return;
-	else
-		this->pacientes_del_centro=	this->pacientes_del_centro + paciente;
-}
 cCentro_de_salud::cCentro_de_salud() {
 
 }
@@ -71,9 +65,8 @@ cCentro_de_salud::~cCentro_de_salud() {
 
  int consrandom()
 {
-	
 	 int valor = rand() % (2 - 1) + 1;
-	return valor;
+     	return valor;
 
 }
  

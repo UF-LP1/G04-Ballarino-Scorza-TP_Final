@@ -25,6 +25,7 @@ tm obtenerFecha(const string& fechaString) {
 
 
 int main() {
+    srand(time(NULL));
     list<cCentro_de_salud*>Centros_de_salud;
     //creo centro de salud 
     Centros_de_salud.push_back(new cCentro_de_salud("Hospital Italiano", "CABA", "Buenos Aires", "Potosí 4240", "011 4959-0200"));
@@ -108,6 +109,8 @@ int main() {
     pacientes.push_back(new cDonante("53356756", "camila", obtenerFecha("29/9/1990"), 'f', "65kg", "O", "Hospital Británico", "Negativo", "Sangre", "CABA", "Buenos Aires", true, true, false, obtenerFecha("14/5/2022")));
     pacientes.push_back(new cDonante("54356756", "juan", obtenerFecha("2/11/1994"), 'm', "75kg", "A", "Hospital Austral", "Positivo", "Medula osea", "Pilar", "Buenos Aires", false, false, true, obtenerFecha("18/6/2023")));
     //CARGO RECEPTORES
+    pacientes.push_back(new cReceptor("42356756", "pepe", obtenerFecha("12/3/2000"), 'm', "90kg", "A", "Hospital Italiano", "Positivo", "Medula osea", "CABA", "Buenos Aires", obtenerFecha("0"), 3, cReceptor::estado::inestable));
+    pacientes.push_back(new cReceptor("52356756", "juan", obtenerFecha("4/7/1998"), 'm', "70kg", "B", "Hospital Italiano", "Negativo", "Sangre", "CABA", "Buenos Aires", obtenerFecha("0"), 2, cReceptor::estado::estable));
     pacientes.push_back(new cReceptor("62356758", "lucas", obtenerFecha("2/5/1995"), 'm', "80kg", "O", "Hospital Provincial", "Positivo", "Medula osea", "Catamarca", "Catamarca", obtenerFecha("0"), 3, cReceptor::estado::inestable));//
     pacientes.push_back(new cReceptor("10356758", "luis", obtenerFecha("7/11/1997"), 'm', "70kg", "AB", "Hospital del Milagro", "Positivo", "Medula osea", "Salta", "Salta", obtenerFecha("0"), 1, cReceptor::estado::estable));
     pacientes.push_back(new cReceptor("12356758", "fernando", obtenerFecha("9/8/1994"), 'm', "85kg", "B", "Hospital Regional Resistencia", "Positivo", "Medula osea", "Resistencia", "Chaco", obtenerFecha("0"), 3, cReceptor::estado::inestable));
@@ -160,8 +163,47 @@ int main() {
     //AHORA EL BANCO DE SANGRE CUENTA CON LA LISTA DE TODOS LOS CENTROS, Y ESTOS CENTROS TIENEN LOS PACIENTES
     //AHORA EL BANCO DE SANGRE TIENE UNA LISTA DE DONANTES Y OTRA DE PACIENTES
     //LLEVAMOS A CABO EL MATCH, AQUI RECORRO LA LISTA DE DONANTES QUE TIENE EL CENTRO, BUSCO RECEPTOR PARA CADA DONANTE, SI ES NULL PT
-    list<cDonante*> ::iterator it_donante = (banco_de_sangre->get_donantes()).begin();
-while( it_donante!= (banco_de_sangre->get_donantes()).begin())
 
+    list<cDonante*> ::iterator it_donante;
+    it_donante=(banco_de_sangre->get_donantes()).begin();
+    while (it_donante != (banco_de_sangre->get_donantes()).end()) {
+        
+ cReceptor* se_encontro_match= banco_de_sangre->match(*it_donante);//BUSCO UN RECEPTOR PARA CADA DONANTE
+ if (se_encontro_match == nullptr) {
+     cout << "no se encontro match para " << (*it_donante)->get_nombre() << " que donaba " << (*it_donante)->getFluido() << " en " << (*it_donante)->get_centro_salud() << "." << endl;
+}
+ if (se_encontro_match != nullptr) {
+     cout << " Se encontro match para " << (*it_donante)->get_nombre() << " que donaba " << (*it_donante)->getFluido() << " en " << (*it_donante)->get_centro_salud() << "." << endl;
+     se_encontro_match->set_estado(cReceptor::estado::recuperado);//seteo el estado del receptor
+ }
+ it_donante++;
+}
+ 
+   // IMPRIM0 RECEPTORES Y DONANTES DEL BSA 
+    banco_de_sangre->imprimir(banco_de_sangre);
+
+    //Y DESPUES EL INFORME POR MES
+    banco_de_sangre->generarInformeDonacionesPorProvincia();
+
+
+
+    //ELIMINO MEMORIA INICIALIZADA
+   
+    for ( list<cCentro_de_salud*>::iterator it = Centros_de_salud.begin(); it != Centros_de_salud.end(); it++) {
+        delete* it;
+    }
+    Centros_de_salud.clear();//vacio lista
+
+    // Eliminar los elementos de la lista 'pacientes'
+
+    for (list<cPaciente*>::iterator it = pacientes.begin(); it != pacientes.end(); it++) {
+        delete* it;
+    }
+    pacientes.clear();//vacio lista
+
+    delete banco_de_sangre;
+
+    cout << endl << endl << endl;
+    cout << "//corre el programa" << endl;
     return 0;
 }

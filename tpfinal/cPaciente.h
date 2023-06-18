@@ -22,8 +22,7 @@ protected:
 	string centro_salud;//nombre del centro de salud, centro salud asociado, lo elije en el main, ya que los metodos no pueden tener ni cout ni cin
 	string tipos_sangre;
 	string rh;
-	string fluido_elegido;//Este sera una atributo que en los receptores sera el que quieren recibir, y en los donantes el que van a donar
-//para esto, hacemos un metodo virtual puro llamado elegir fluido, donde en las clases hijas varia si es del donante o del receptor
+	string fluido_elegido;
 	string partido;
 	string provincia;
 public:
@@ -32,7 +31,6 @@ public:
 	void set_tipo_de_Sangre_y_rh(cSangre* sangre);//HACEMOS UN SET DE LOS DOS, YA QUE EN LA VIDA REAL CUANDO SE INDICA LAS SABRE SE INDICA A PARTIR DEL TIPO Y DEL FACTOR RH
 	string get_tipos_sangre();
 	string get_rh();
-	
 	virtual void setFluido(string& fluido_elegido) = 0;  //EL METODO ABSTRACTO QUE IMPLEMENTAREMOS VA A SER ELELGIR FLUIDO, POR UN LADO LOS RECEPTORES ELEGIRIAN QUE RECIBIR, Y LOS PACIENTES QUE DONAR
 	
 	void set_centro_saludd(string &centro_salud);

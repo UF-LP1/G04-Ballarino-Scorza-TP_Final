@@ -7,7 +7,7 @@ public:
 	enum class estado { inestable,estable, recuperado };
 
 private:
-	tm *fecha_agregado_espera;//ESTE ATRIBUTO SE CARGA EN EL BSA, EL DIA QUE FUE AGREGADO
+	tm fecha_agregado_espera;//ESTE ATRIBUTO SE CARGA EN EL BSA, EL DIA QUE FUE AGREGADO
 	unsigned int prioridad;
 	estado estado_pac;
 public:

@@ -46,6 +46,9 @@ string cPaciente::get_tipos_sangre() {
 string cPaciente::get_rh() {
     return  this->rh;
 }
+string cPaciente::get_nombre() {
+    return  this->nombre;
+}
 void cPaciente::set_centro_saludd(string &centro_salud) {
     this->centro_salud = centro_salud;
 }
@@ -86,9 +89,6 @@ string cPaciente::get_id() {
 }
 void cPaciente::set_nombre(string& nombre) {
     this->nombre = nombre;
-}
-string cPaciente::get_nombre() {
-    return this->nombre;
 }
 cPaciente::~cPaciente(){
 }

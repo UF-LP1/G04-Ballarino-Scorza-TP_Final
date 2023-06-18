@@ -103,7 +103,7 @@ list<cPaciente*>& cBSA::ordenar_por_prioridad(list<cPaciente*>& listafluido_recp
 						(receptorActual->get_estado() > receptorSiguiente->get_estado() ||//se eel estado es menor es porque es mas urgente
 							distancia_fechas(receptorActual->get_fecha_agregado_espera()) < distancia_fechas(receptorSiguiente->get_fecha_agregado_espera())))) {//si la espera es mayor, tiene prioridad
 
-					ordeno_punteros(*itReceptores, *itSiguiente);
+					ordeno_punteros(*itReceptores, *itSiguiente);//USAMOS TEMPLATE
 				}
 			}
 		}
@@ -249,7 +249,7 @@ void cBSA::generarInformeDonacionesPorProvincia() {
 		"Tucumán"
 	};
 
-	cout << "Informe de Donaciones por Provincia - [Mes, Año]" << endl;
+	cout << "Informe de Donaciones por Provincia" << endl;
 
 	list<DonacionesProvincia*>::iterator it = donacionesPorProvincia.begin();
 	for (list<string>::iterator provinciait = nombresProvincias.begin(); provinciait != nombresProvincias.end(); provinciait++) {

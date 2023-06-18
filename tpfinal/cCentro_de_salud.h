@@ -29,7 +29,6 @@ public:
 	void set_pacientes_del_centro(list<cPaciente*>& pacientes);//AGREGO PACIENTES A LA LISTA
 	list<cPaciente*> get_pacientes_del_centro();
 	 void protocolo_de_transplante_final(cReceptor* receptor_seleccionado, cDonante* donante_seleccionado, list<cReceptor*> receptores);
-	 void agregar_paciente(cPaciente* paciente);//AGREGO PACIENTE AL CENTRO
 	 friend class cBSA;
 	 cCentro_de_salud();
 };
