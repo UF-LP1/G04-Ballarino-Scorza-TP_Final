@@ -15,14 +15,15 @@ struct DonacionesProvincia {
 };
 class cBSA {
 private:
-
+	string nombre;
 	list<cReceptor*> receptores;
 	list<cDonante*> donantes;
 	list<cCentro_de_salud*> centros_de_salud;
 	list<DonacionesProvincia*> donacionesPorProvincia;
 	
 public:
-	cBSA(list<cReceptor*> receptores, list<cDonante*> donantes, list<cCentro_de_salud*> centros_de_salud);
+	cBSA(string nombre);
+	cBSA();
 	void set_lista_de_centros(list<cCentro_de_salud*> centros_de_salud);
 	list<cCentro_de_salud*> get_lista_de_centros();
 	/*QUEREMOS QUE LAS LISTAS DE RECEPTORES Y DONANTES DE MI CLASE BSA SE CARGUE, ENTONCES A TRAVES DE UN METODO QUE RECORRE 
@@ -31,6 +32,7 @@ public:
 	*/
 	void set_receptores_y_donantes();//IMPORTANTE REMARCAR QUE EL SET NO RECIBE NADA YA QUE SE CARGAN A PARTIR DEL ATRIBUTO CENTRO DE SALUD
 	//QUE YA ESTA CONTENIDO EN LA CLASE, ESTE TIENE SUS LISTAS DE PACIENTES
+	list<cDonante*> get_donantes();
 	list<cPaciente*>& separar_segun_fluido(cDonante* donante);
 	
 	cReceptor* match(cDonante* donante);//LA IDEA ES ENCONTRAR UN RECPTOR AL DONANTE

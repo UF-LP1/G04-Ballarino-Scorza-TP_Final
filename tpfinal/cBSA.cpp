@@ -11,75 +11,49 @@ void ordeno_punteros(T*& a, T*& b) {
 	b = aux;
 }
 
-cBSA::cBSA(list<cReceptor*>receptores, list<cDonante*>donantes, list<cCentro_de_salud*>centros_de_salud)
-	: receptores(receptores.begin(), receptores.end()),donantes(donantes.begin(), donantes.end()),
-centros_de_salud(centros_de_salud.begin(), centros_de_salud.end()) {
+cBSA::cBSA(string nombre) {
+	this->nombre = nombre;
+}
+cBSA::cBSA() {
 
 }
-void cBSA::set_lista_de_centros(list<cCentro_de_salud*> centros_de_salud) {//list<cpacinete>sangre
-	this->centros_de_salud = centros_de_salud;
+void cBSA::set_lista_de_centros(list<cCentro_de_salud*> centros_de_salud) {//recibo desde el main
+	list<cCentro_de_salud*>::iterator it;//debo hacer push_back de cada centro 
+	for (it = centros_de_salud.begin(); it != centros_de_salud.end(); it++) {
+		this->centros_de_salud.push_back(*it);
+	}
 }
+
 list<cCentro_de_salud*> cBSA::get_lista_de_centros() {
 	return this->centros_de_salud;
 }
-void cBSA::set_receptores_y_donantes()
+void cBSA::set_receptores_y_donantes()//SEPARO EN DOS LISTAS
 {
 	// recorremos cada lista de centros, y de cada lista de centros, los pacientes asociados
-	list<cCentro_de_salud*>::iterator it;
-	for (it = this->centros_de_salud.begin(); it != this->centros_de_salud.end(); it++) {//RECORRO LOS CENTROS
-		list<cPaciente*>::iterator it2;
-		for (it2=((*it)->get_pacientes_del_centro().begin());it2!=((*it)->get_pacientes_del_centro().end());it2++)//AHORA DEL PRIMERO CENTRO, RECORRO LA LISTA DE PACIENTES ASOCIADOS AL CENTRO
+	list<cCentro_de_salud*>::iterator it_centro;
+	for (it_centro = this->centros_de_salud.begin(); it_centro != this->centros_de_salud.end(); it_centro++) {//RECORRO LOS CENTROS
+		list<cPaciente*>::iterator it_pacientes;
+		for (it_pacientes =((*it_centro)->get_pacientes_del_centro().begin()); it_pacientes !=((*it_centro)->get_pacientes_del_centro().end()); it_pacientes++)//AHORA DEL PRIMERO CENTRO, RECORRO LA LISTA DE PACIENTES ASOCIADOS AL CENTRO
 			{
-			cReceptor* receptor = dynamic_cast<cReceptor*>(*it2);
+			cDonante* donante = dynamic_cast<cDonante*>(*it_pacientes);
+			//CHEQUEO CONDICIONES DE DONACION
+			if (donante != nullptr && (distancia_fechas(donante->get_fechanac()) > 18 && distancia_fechas(donante->get_fechanac()) < 65 && donante->get_peso() > "50"
+				&& donante->get_enfermedades() == false && donante->get_tatuaje() == false && donante->get_donacion() == false)) {
+				donantes.push_back(donante);
+			}
+			cReceptor* receptor = dynamic_cast<cReceptor*>(*it_pacientes);
 			if (receptor!=nullptr) {//DYNAMIC CAST PARA VER SI EL PUNTERO DE PACIENTE ES RECEPTOR O DONANTE
 				receptor->set_fecha_agregado_espera(setear_fecha_ingreso_espera());//SETEO LA FECHA DE INGRESO DEL RECEPTOR CON LA DE HOY QUE SERIA CUANDO ENTRO
 				receptores.push_back(receptor);
 			}
-			cDonante* donante = dynamic_cast<cDonante*>(*it2);
-			 if  (donante!=nullptr && (distancia_fechas(donante->get_fechanac())> 18 && distancia_fechas(donante->get_fechanac()) < 65 && donante->get_peso() > "50" 
-					&& donante->get_enfermedades() == false && donante->get_tatuaje() == false && donante->get_donacion() == false)) {
-					donantes.push_back(donante);
-				}
 			}
 			}
 
 	}
 //Ya TENEMOS SEPARADOS LISTA DE DONANTES Y PACIENTES
-list<cPaciente*>& cBSA::separar_segun_fluido(cDonante* donante) {
-		list<cReceptor*>::iterator it;
-		list<cPaciente*> listafluido_recp;
-		for (it = receptores.begin(); it != receptores.end(); it++) {//ESTE METODO RECORRE LA LISTA DE RECEPTORES Y DEVUELVE CON LOS RECEPTORES DE ESE FLUIDO
-			if (*(*it) == *donante) {  //SOBRECARGA DE OPERDOR == 
-				listafluido_recp.push_back((*it));
-			}
-		}
-
-		return ordenar_por_prioridad(listafluido_recp);
-	}
-//DEVUELVE LA LISTA DE RECEPTORES ORDENADA POR PRIORIDAD SEGUN FLUIDO DONANTE
-
-list<cPaciente*>& cBSA::ordenar_por_prioridad(list<cPaciente*>& listafluido_recp) {
-	for (list<cPaciente*>::iterator itReceptores = listafluido_recp.begin(); itReceptores != listafluido_recp.end(); ++itReceptores) {          //ordenamiento por burbuja
-		for (list<cPaciente*>::iterator itSiguiente = next(itReceptores); itSiguiente != listafluido_recp.end(); ++itSiguiente) {
-			cReceptor* receptorActual = dynamic_cast<cReceptor*>(*itReceptores);
-			cReceptor* receptorSiguiente = dynamic_cast<cReceptor*>(*itSiguiente);
-
-			if (receptorActual!=nullptr && receptorSiguiente!=nullptr) {
-				if (receptorActual->get_prioridad() < receptorSiguiente->get_prioridad() ||//si la prioridad es mayor , es porque es mas urgente
-					(receptorActual->get_prioridad() == receptorSiguiente->get_prioridad() &&
-						(receptorActual->get_estado() > receptorSiguiente->get_estado() ||//se eel estado es menor es porque es mas urgente
-							distancia_fechas(receptorActual->get_fecha_agregado_espera()) < distancia_fechas(receptorSiguiente->get_fecha_agregado_espera())))) {//si la espera es mayor, tiene prioridad
-
-					ordeno_punteros(* itReceptores, * itSiguiente);
-				}
-			}
-		}
-	}
-
-	return listafluido_recp;
+list<cDonante*> cBSA:: get_donantes() {
+	return this->donantes;
 }
-
-
 cReceptor* cBSA::match(cDonante* donante) { //en el main recorro lista de donantes, y busco receptores para el mismo, ver pasa si no hay donante compatible 
 	
 	cReceptor* receptor_seleccionado = nullptr;
@@ -104,6 +78,39 @@ cReceptor* cBSA::match(cDonante* donante) { //en el main recorro lista de donant
 
 }
 
+list<cPaciente*>& cBSA::separar_segun_fluido(cDonante* donante) {
+	list<cReceptor*>::iterator it;
+	list<cPaciente*> listafluido_recp;
+	for (it = receptores.begin(); it != receptores.end(); it++) {//ESTE METODO RECORRE LA LISTA DE RECEPTORES Y DEVUELVE CON LOS RECEPTORES DE ESE FLUIDO
+		if (*(*it) == *donante) {  //SOBRECARGA DE OPERDOR == 
+			listafluido_recp.push_back((*it));
+		}
+	}
+
+	return ordenar_por_prioridad(listafluido_recp);
+}
+//DEVUELVE LA LISTA DE RECEPTORES ORDENADA POR PRIORIDAD SEGUN FLUIDO DONANTE
+
+list<cPaciente*>& cBSA::ordenar_por_prioridad(list<cPaciente*>& listafluido_recp) {
+	for (list<cPaciente*>::iterator itReceptores = listafluido_recp.begin(); itReceptores != listafluido_recp.end(); ++itReceptores) {          //ordenamiento por burbuja
+		for (list<cPaciente*>::iterator itSiguiente = next(itReceptores); itSiguiente != listafluido_recp.end(); ++itSiguiente) {
+			cReceptor* receptorActual = dynamic_cast<cReceptor*>(*itReceptores);
+			cReceptor* receptorSiguiente = dynamic_cast<cReceptor*>(*itSiguiente);
+
+			if (receptorActual != nullptr && receptorSiguiente != nullptr) {
+				if (receptorActual->get_prioridad() < receptorSiguiente->get_prioridad() ||//si la prioridad es mayor , es porque es mas urgente
+					(receptorActual->get_prioridad() == receptorSiguiente->get_prioridad() &&
+						(receptorActual->get_estado() > receptorSiguiente->get_estado() ||//se eel estado es menor es porque es mas urgente
+							distancia_fechas(receptorActual->get_fecha_agregado_espera()) < distancia_fechas(receptorSiguiente->get_fecha_agregado_espera())))) {//si la espera es mayor, tiene prioridad
+
+					ordeno_punteros(*itReceptores, *itSiguiente);
+				}
+			}
+		}
+	}
+
+	return listafluido_recp;
+}
 
 cReceptor* cBSA:: buscar_receptor_compatibles_sangre(cDonante* donante_seleccionado, list<cPaciente*>& listafluido_recp) {
 	list<cPaciente*>::iterator itpaciente= listafluido_recp.begin();
@@ -184,9 +191,11 @@ bool cBSA::protocolo_transplante_inicio(cReceptor* receptor_seleccionado, cDonan
 		return false;
 	}
 }
+
 list<cReceptor*>& cBSA :: get_receptores() {
 	return this->receptores;
 }
+
 list<cReceptor*> cBSA::receptores_de_un_centro(string centro_de_salud) {
 	list<cReceptor*>::iterator it;
 	list<cReceptor*> receptores_de_ese_centro;
@@ -199,6 +208,7 @@ list<cReceptor*> cBSA::receptores_de_un_centro(string centro_de_salud) {
 
 	return receptores_de_ese_centro;
 }
+
 unsigned int cBSA::prioridad_de_receptor(cReceptor* receptor_seleccionado) {
 	list<cReceptor*>::iterator it = receptores.begin();
 

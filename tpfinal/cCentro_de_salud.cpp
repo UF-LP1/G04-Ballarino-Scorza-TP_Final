@@ -16,7 +16,7 @@ string cCentro_de_salud::get_nombre() {
 	return this->nombre;
 }
 
-void cCentro_de_salud::set_pacientes_del_centro(list<cPaciente*>& pacientes) {
+void cCentro_de_salud::set_pacientes_del_centro(list<cPaciente*>& pacientes) {//SE CARGAN DESDE EL MAIN
 	list<cPaciente*>::iterator it = pacientes.begin();
 
 	while (it != pacientes.end()) {
@@ -28,7 +28,7 @@ void cCentro_de_salud::set_pacientes_del_centro(list<cPaciente*>& pacientes) {
 
 		it++;
 	}
-}//desde el main
+}
 list<cPaciente*> cCentro_de_salud::get_pacientes_del_centro() {
 	return this->pacientes_del_centro;
 }
