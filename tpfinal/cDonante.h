@@ -12,7 +12,7 @@ private:
 	bool donacion;
 	tm fecha_de_donacion;//ESTA FECHA ES PARA VER HACE CUANTO ESTA EL ORGANO
 public:
-	cDonante(const string id, string nombre, tm fechanac, char sexo, string peso, string tipos_sangre, string centro_salud, string rh, string fluido_elegido, string partido, string provincia, bool enfermedades, bool tatuaje, bool donacion, tm fecha_de_donacion);
+	cDonante(const  int id, string nombre, tm fechanac, char sexo, string peso, string tipos_sangre, string centro_salud, string rh, string fluido_elegido, string partido, string provincia, bool enfermedades, bool tatuaje, bool donacion, tm fecha_de_donacion);
 	void setFluido(string& fluido_elegido) override;
 	void set_enfermedades(bool &enfermedades);
 	void set_tatuaje(bool &tatuaje);

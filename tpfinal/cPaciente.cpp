@@ -1,6 +1,6 @@
 #include "cPaciente.h"
 
-cPaciente::cPaciente(const string id, string nombre, tm fechanac,char sexo, string peso, string tipos_sangre,string centro_salud,string rh, string fluido_elegido,string partido,string provincia):id(id) {
+cPaciente::cPaciente(const  int id, string nombre, tm fechanac,char sexo, string peso, string tipos_sangre,string centro_salud,string rh, string fluido_elegido,string partido,string provincia):id(id) {
 	this->nombre = nombre;
 	this->fechanac = fechanac;
 	this->sexo = sexo;
@@ -84,11 +84,12 @@ void cPaciente::set_provincia(string& provincia) {
     this->provincia = provincia;
     return;
 }
-string cPaciente::get_id() {
+ int cPaciente::get_id() {
     return this->id;
 }
 void cPaciente::set_nombre(string& nombre) {
     this->nombre = nombre;
 }
+cPaciente::cPaciente() :id(id) {}
 cPaciente::~cPaciente(){
 }

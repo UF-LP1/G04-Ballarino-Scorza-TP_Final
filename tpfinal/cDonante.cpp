@@ -1,6 +1,6 @@
 #include"cDonante.h"
 
-cDonante::cDonante(const string id,string nombre, tm fechanac, char sexo, string peso, string tipos_sangre, string centro_salud, string rh,string fluido_elegido ,string partido,string provincia, bool enfermedades, bool tatuaje, bool donacion, tm fecha_de_donacion):cPaciente(id, nombre, fechanac, sexo, peso, tipos_sangre, centro_salud,rh,fluido_elegido, partido, provincia) {
+cDonante::cDonante(const  int id,string nombre, tm fechanac, char sexo, string peso, string tipos_sangre, string centro_salud, string rh,string fluido_elegido ,string partido,string provincia, bool enfermedades, bool tatuaje, bool donacion, tm fecha_de_donacion):cPaciente(id, nombre, fechanac, sexo, peso, tipos_sangre, centro_salud,rh,fluido_elegido, partido, provincia) {
 	this->enfermedades = enfermedades;
 	this->tatuaje = tatuaje;
 	this->donacion = donacion;
