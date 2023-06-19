@@ -7,14 +7,14 @@ using namespace std;
 
 class cRegistro_don {
 private:
-	string nombre;
+	
 	string fluido_donado;
 	tm fecha_de_extraccion;
-	string volumen;
+	
 	string centro_de_extraccion;
 public:
-	cRegistro_don(string nombre, string fluido_donado, tm fecha_de_extraccion, string volumen, string centro_de_extraccion);
-	string get_nombre();
+	cRegistro_don( string fluido_donado, tm fecha_de_extraccion, string centro_de_extraccion);
+	
 	~cRegistro_don();
 };
 //nuevo
