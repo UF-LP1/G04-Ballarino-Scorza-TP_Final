@@ -1,23 +1,24 @@
+//NUEVO
 #include "cPaciente.h"
 
-cPaciente::cPaciente(const  int id, string nombre, tm fechanac,char sexo, string peso, string tipos_sangre,string centro_salud,string rh, string fluido_elegido,string partido,string provincia):id(id) {
-	this->nombre = nombre;
-	this->fechanac = fechanac;
-	this->sexo = sexo;
-	this->peso = peso;
-	this->tipos_sangre = tipos_sangre;
-	this->centro_salud = centro_salud;
+cPaciente::cPaciente(const string id, string nombre, tm fechanac, char sexo, string peso, string tipos_sangre, string centro_salud, string rh, string fluido_elegido, string partido, string provincia) :id(id) {
+    this->nombre = nombre;
+    this->fechanac = fechanac;
+    this->sexo = sexo;
+    this->peso = peso;
+    this->tipos_sangre = tipos_sangre;
+    this->centro_salud = centro_salud;
     this->rh = rh;
     this->fluido_elegido = fluido_elegido;
     this->provincia = provincia;
     this->partido = partido;
 }
-void cPaciente:: set_tipo_de_Sangre_y_rh(cSangre* sangre) 
+void cPaciente::set_tipo_de_Sangre_y_rh(cSangre* sangre)
 {
-	
-	if(sangre!=NULL)
+
+    if (sangre != NULL)
         switch (sangre->get_tipo_de_sangre()) {
-        case cSangre::tipo_d_sangre ::A:
+        case cSangre::tipo_d_sangre::A:
             tipos_sangre = "A";
             break;
         case  cSangre::tipo_d_sangre::B:
@@ -49,7 +50,7 @@ string cPaciente::get_rh() {
 string cPaciente::get_nombre() {
     return  this->nombre;
 }
-void cPaciente::set_centro_saludd(string &centro_salud) {
+void cPaciente::set_centro_saludd(string& centro_salud) {
     this->centro_salud = centro_salud;
 }
 string cPaciente::get_centro_salud() {
@@ -61,7 +62,7 @@ void cPaciente::set_peso(string& peso) {
 string cPaciente::get_peso() {
     return this->peso;
 }
-void cPaciente::set_fechanac(tm &fechanac) {
+void cPaciente::set_fechanac(tm& fechanac) {
     this->fechanac = fechanac;
 }
 tm cPaciente::get_fechanac() {
@@ -84,12 +85,12 @@ void cPaciente::set_provincia(string& provincia) {
     this->provincia = provincia;
     return;
 }
- int cPaciente::get_id() {
+string cPaciente::get_id() {
     return this->id;
 }
 void cPaciente::set_nombre(string& nombre) {
     this->nombre = nombre;
 }
-cPaciente::cPaciente() :id(id) {}
-cPaciente::~cPaciente(){
+cPaciente::~cPaciente() {
 }
+//NUEVO

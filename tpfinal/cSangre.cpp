@@ -1,20 +1,21 @@
+//NUEVO
 #include "cSangre.h"
 
-cSangre:: cSangre(string estado, tipo_d_sangre tipo_de_sangre, Rh rh) :cFluido(estado) ,tipo_de_sangre (tipo_de_sangre), rh(rh) {
+cSangre::cSangre(string estado, tipo_d_sangre tipo_de_sangre, Rh rh) :cFluido(estado), tipo_de_sangre(tipo_de_sangre), rh(rh) {
 }
 enum class cSangre::tipo_d_sangre cSangre::get_tipo_de_sangre() {
 	return tipo_de_sangre;
 }
-	enum class cSangre::Rh cSangre::get_rh() {
-		return rh;
+enum class cSangre::Rh cSangre::get_rh() {
+	return rh;
 }
 string cSangre::getTipoFluido() {
-		return "Sangre";
-	}
-bool cSangre:: VerificarFechaMaxima(tm fecha) {
+	return "Sangre";
+}
+bool cSangre::VerificarFechaMaxima(tm fecha) {
 	time_t timer;
-	time(&timer);   //usamos el timer para tener la fecha y hora actual 
-	time_t fecha_ = mktime(&fecha);//el mktime nos devuelve la cantidad de segundos a partir de la Época Unix (1 de Enero del 1970 00:00:00) hasta la fecha actual. 
+	time(&timer);   //usamos el timer para tener la fecha y hora actual
+	time_t fecha_ = mktime(&fecha);//el mktime nos devuelve la cantidad de segundos a partir de la Época Unix (1 de Enero del 1970 00:00:00) hasta la fecha actual.
 	double  dist_fecha = 0;
 	if (fecha_ != (time_t)(-1) && timer != (time_t)(-1))
 	{//ambas fechas pasadas por el mktime deben ser distintas de -1 ya que si son iguales a -1 es porque no se pudo representar la fecha/hora en el calendario.
@@ -28,4 +29,5 @@ bool cSangre:: VerificarFechaMaxima(tm fecha) {
 cSangre::cSangre() :cFluido(estado) {
 
 }
-cSangre::~cSangre(){}
+cSangre::~cSangre() {}
+//nuevo

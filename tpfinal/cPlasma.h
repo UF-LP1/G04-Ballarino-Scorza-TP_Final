@@ -1,3 +1,4 @@
+//nuevo
 #pragma once
 #include "cFluido.h"
 
@@ -11,3 +12,4 @@ public:
 	~cPlasma();
 	cPlasma();
 };
+//NUEVO

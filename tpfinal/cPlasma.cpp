@@ -1,3 +1,4 @@
+//NUEVO
 #include "cPlasma.h"
 
 cPlasma::cPlasma(string estado, string tipo_de_plasma) :cFluido(estado) {
@@ -8,8 +9,8 @@ string cPlasma::getTipoFluido() {
 }
 bool cPlasma::VerificarFechaMaxima(tm fecha) {
 	time_t timer;
-	time(&timer);   //usamos el timer para tener la fecha y hora actual 
-	time_t fecha_ = mktime(&fecha);//el mktime nos devuelve la cantidad de segundos a partir de la Época Unix (1 de Enero del 1970 00:00:00) hasta la fecha actual. 
+	time(&timer);   //usamos el timer para tener la fecha y hora actual
+	time_t fecha_ = mktime(&fecha);//el mktime nos devuelve la cantidad de segundos a partir de la Época Unix (1 de Enero del 1970 00:00:00) hasta la fecha actual.
 	double  dist_fecha = 0;
 	if (fecha_ != (time_t)(-1) && timer != (time_t)(-1))
 	{//ambas fechas pasadas por el mktime deben ser distintas de -1 ya que si son iguales a -1 es porque no se pudo representar la fecha/hora en el calendario.
@@ -20,7 +21,8 @@ bool cPlasma::VerificarFechaMaxima(tm fecha) {
 	else
 		return false;
 }
-cPlasma::cPlasma():cFluido(estado) {
+cPlasma::cPlasma() :cFluido(estado) {
 
 }
-cPlasma::~cPlasma(){}
+cPlasma::~cPlasma() {}
+//nuevo

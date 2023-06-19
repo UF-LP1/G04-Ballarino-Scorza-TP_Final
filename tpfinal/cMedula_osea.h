@@ -1,6 +1,6 @@
 #pragma once
 #include "cFluido.h"
-
+//nuevo
 class cMedula_osea :public cFluido {
 private:
 	string color;
@@ -11,3 +11,4 @@ public:
 	~cMedula_osea();
 	cMedula_osea();
 };
+//NUEVO

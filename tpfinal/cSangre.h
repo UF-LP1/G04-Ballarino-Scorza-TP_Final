@@ -1,3 +1,4 @@
+//NUEVO
 #pragma once
 #include "cFluido.h"
 
@@ -17,3 +18,4 @@ public:
 	bool VerificarFechaMaxima(tm fecha) override;
 	Rh get_rh();
 };
+//nuevo
