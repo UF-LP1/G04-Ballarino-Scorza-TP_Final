@@ -33,20 +33,26 @@ void cDonante::set_fecha_de_donacion(tm fecha_de_donacion) {
 tm cDonante::get_fecha_de_donacion() {
 	return this->fecha_de_donacion;
 }
-void cDonante::set_registro_dedonaciones(list<cRegistro_don*>& registro) {
-	list<cRegistro_don*>::iterator it = registro.begin();
+void cDonante::set_registro_de_donaciones() {
+	cRegistro_don* nuevo_registro = new cRegistro_don(fluido_elegido, fecha_de_donacion, centro_salud);
 
-	while (it != registro.end()) {
-		if ((*it)->get_nombre() == this->get_nombre()) {
-			registro_de_donaciones.push_back(*it);// cada donante tiene su propio lista de refgistro, que sale de la misma lista para todos los pacientes
+	// Agregamos el nuevo registro a la lista de donaciones del donante
+	registro_de_donaciones.push_back(nuevo_registro);
+}
 
-		}
-
-		it++;
-	}
+string cDonante::to_string() {
+	stringstream s;
+	s << "Atributos del donante: " << "ID: " << id << ", " << "Nombre: " << nombre << ", " << "Sexo: " << sexo << ", " << "Peso: " << peso << ", "
+		<< "Centro de salud: " << centro_salud << ", " << "Tipo de sangre: " << tipos_sangre << ", " << "RH: " << rh << ", " << "Fluido elegido: " << fluido_elegido << ", " << "partido" << partido << "," << "provincia" << provincia<<endl;
+	return s.str();
 }
 
 cDonante::~cDonante() {
+
+	list<cRegistro_don*>::iterator it;
+	for (it = registro_de_donaciones.begin(); it != registro_de_donaciones.end(); ++it) {
+		delete (*it);
+	}
 
 }
 //NUEVO

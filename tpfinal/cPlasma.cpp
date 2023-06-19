@@ -24,5 +24,11 @@ bool cPlasma::VerificarFechaMaxima(tm fecha) {
 cPlasma::cPlasma() :cFluido(estado) {
 
 }
+string cPlasma::to_string() {
+	stringstream s;
+	s << " Atributos de Plasma:" << endl << endl;
+	s << "estado" << estado << " ,tipo de plasma" << tipo_de_plasma << endl;
+	return s.str();
+}
 cPlasma::~cPlasma() {}
 //nuevo

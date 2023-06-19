@@ -55,7 +55,16 @@ void cCentro_de_salud::protocolo_de_transplante_final(cReceptor* receptor_selecc
     }
 
 }
-
+string cCentro_de_salud::to_string() {
+    stringstream s;
+    s << " Atributos de centro de salud:" << endl << endl;
+    s << "Nombre: " << nombre << endl;
+    s << "Partido: " << partido << endl;
+    s << "Provincia: " << provincia << endl;
+    s << "Dirección: " << direccion << endl;
+    s << "Teléfono: " << telefono << endl;
+    return s.str();
+}
 cCentro_de_salud::cCentro_de_salud() {
 
 }

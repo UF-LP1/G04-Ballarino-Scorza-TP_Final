@@ -22,7 +22,7 @@ using namespace std;
 tm obtenerFecha(const string& fechaString) {
     tm fecha = {};
     istringstream ss(fechaString);
-    ss >> std::get_time(&fecha, "%d/%m/%Y");
+    ss >> get_time(&fecha, "%d/%m/%Y");
 
     return fecha;
 }
@@ -137,20 +137,6 @@ int main() {
     pacientes.push_back(new cReceptor("33356758", "rocio", obtenerFecha("13/2/1990"), 'f', "65kg", "O", "Hospital Italiano", "Negativo", "Sangre", "CABA", "Buenos Aires", obtenerFecha("9/6/2022"), 3, cReceptor::estado::estable));
     pacientes.push_back(new cReceptor("34356758", "gaston", obtenerFecha("6/11/1994"), 'm', "75kg", "A", "Hospital Provincial", "Positivo", "Medula osea", "Catamarca", "Catamarca", obtenerFecha("10/6/2022"), 4, cReceptor::estado::inestable));
     pacientes.push_back(new cReceptor("35356758", "ana", obtenerFecha("19/7/1989"), 'f', "60kg", "B", "Hospital Provincial", "Negativo", "Plasma", "Catamarca", "Catamarca", obtenerFecha("11/6/2022"), 1, cReceptor::estado::estable));
-    pacientes.push_back(new cReceptor("36356758", "mauro", obtenerFecha("2/4/1993"), 'm', "70kg", "AB", "Hospital del Milagro", "Positivo", "Medula osea", "Salta", "Salta", obtenerFecha("12/6/2022"), 2, cReceptor::estado::inestable));
-    pacientes.push_back(new cReceptor("37356758", "soledad", obtenerFecha("25/8/1988"), 'f', "55kg", "O", "Hospital del Milagro", "Negativo", "Sangre", "Salta", "Salta", obtenerFecha("13/6/2022"), 3, cReceptor::estado::estable));
-    pacientes.push_back(new cReceptor("38356788", "luciano", obtenerFecha("20/2/1992"), 'm', "80kg", "A", "Hospital Regional Resistencia", "Positivo", "Medula osea", "Resistencia", "Chaco", obtenerFecha("14/6/2022"), 4, cReceptor::estado::inestable));
-    pacientes.push_back(new cReceptor("39356758", "julieta", obtenerFecha("15/11/1997"), 'f', "65kg", "B", "Hospital Regional Resistencia", "Negativo", "Plasma", "Resistencia", "Chaco", obtenerFecha("15/6/2022"), 1, cReceptor::estado::estable));
-    pacientes.push_back(new cReceptor("40356758", "pablo", obtenerFecha("10/7/1990"), 'm', "75kg", "AB", "Hospital Ramos Mejía", "Positivo", "Medula osea", "CABA", "Buenos Aires", obtenerFecha("16/6/2022"), 2, cReceptor::estado::inestable));
-    pacientes.push_back(new cReceptor("41356758", "andrea", obtenerFecha("3/4/1995"), 'f', "60kg", "O", "Hospital Ramos Mejía", "Negativo", "Sangre", "CABA", "Buenos Aires", obtenerFecha("17/6/2022"), 3, cReceptor::estado::estable));
-    pacientes.push_back(new cReceptor("42356758", "daniel", obtenerFecha("16/12/1999"), 'm', "70kg", "A", "Hospital de Niños", "Positivo", "Medula osea", "La Plata", "Buenos Aires", obtenerFecha("18/6/2022"), 4, cReceptor::estado::inestable));
-    pacientes.push_back(new cReceptor("43356758", "mariana", obtenerFecha("29/5/1994"), 'f', "55kg", "B", "Hospital de Niños", "Negativo", "Plasma", "La Plata", "Buenos Aires", obtenerFecha("19/6/2022"), 1, cReceptor::estado::estable));
-    pacientes.push_back(new cReceptor("44356758", "gabriel", obtenerFecha("7/9/1996"), 'm', "75kg", "O", "Hospital Alemán", "Positivo", "Medula osea", "CABA", "Buenos Aires", obtenerFecha("20/6/2022"), 2, cReceptor::estado::inestable));
-    pacientes.push_back(new cReceptor("45356758", "romina", obtenerFecha("11/3/1991"), 'f', "65kg", "A", "Hospital Alemán", "Negativo", "Sangre", "CABA", "Buenos Aires", obtenerFecha("21/6/2022"), 3, cReceptor::estado::estable));
-    pacientes.push_back(new cReceptor("46356758", "luis", obtenerFecha("14/6/1993"), 'm', "70kg", "AB", "Hospital Pirovano", "Positivo", "Medula osea", "CABA", "Buenos Aires", obtenerFecha("22/6/2022"), 4, cReceptor::estado::inestable));
-    pacientes.push_back(new cReceptor("47356758", "mariana", obtenerFecha("9/11/1998"), 'f', "60kg", "O", "Hospital Pirovano", "Negativo", "Plasma", "CABA", "Buenos Aires", obtenerFecha("23/6/2022"), 1, cReceptor::estado::estable));
-    pacientes.push_back(new cReceptor("48356758", "matias", obtenerFecha("22/4/1989"), 'm', "75kg", "A", "Hospital Durand", "Positivo", "Medula osea", "CABA", "Buenos Aires", obtenerFecha("24/6/2022"), 2, cReceptor::estado::inestable));
-    pacientes.push_back(new cReceptor("49356758", "sofia", obtenerFecha("5/2/1990"), 'f', "65kg", "B", "Hospital Durand", "Negativo", "Sangre", "CABA", "Buenos Aires", obtenerFecha("25/6/2022"), 3, cReceptor::estado::estable));
     pacientes.push_back(new cReceptor("50356758", "lucas", obtenerFecha("30/6/1997"), 'm', "70kg", "O", "Hospital Argerich", "Positivo", "Medula osea", "CABA", "Buenos Aires", obtenerFecha("26/6/2022"), 1, cReceptor::estado::estable));
     pacientes.push_back(new cReceptor("51356758", "maria", obtenerFecha("13/1/1992"), 'f', "60kg", "A", "Hospital Argerich", "Negativo", "Plasma", "CABA", "Buenos Aires", obtenerFecha("27/6/2022"), 4, cReceptor::estado::inestable));
     pacientes.push_back(new cReceptor("52356758", "julian", obtenerFecha("26/3/1995"), 'm', "80kg", "AB", "Hospital Británico", "Positivo", "Medula osea", "CABA", "Buenos Aires", obtenerFecha("28/6/2022"), 2, cReceptor::estado::estable));

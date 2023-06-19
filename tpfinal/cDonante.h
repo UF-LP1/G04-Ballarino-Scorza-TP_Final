@@ -4,6 +4,7 @@
 #include "cRegistro_don.h"
 #include <list>
 #include <ctime>
+#include<sstream>
 class cDonante :public cPaciente {
 private:
 	list<cRegistro_don*> registro_de_donaciones;
@@ -21,7 +22,8 @@ public:
 	bool get_tatuaje();
 	bool get_donacion();
 	void set_fecha_de_donacion(tm fecha_de_donacion);
-	void set_registro_dedonaciones(list<cRegistro_don*>& registro);
+	void set_registro_de_donaciones();
+	string to_string();
 	tm get_fecha_de_donacion();
 	~cDonante();
 };

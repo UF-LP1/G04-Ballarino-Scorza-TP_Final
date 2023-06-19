@@ -29,6 +29,11 @@ enum class cReceptor::estado cReceptor::get_estado() {
 tm cReceptor::get_fecha_agregado_espera() {
 	return this->fecha_agregado_espera;
 }
+string cReceptor::to_string() {
+	stringstream s;
+	s << "Atributos del receptor: " << "prioridad "<<prioridad<< "Nombre: " << nombre << ", " << "Sexo: " << sexo << ", " << "Peso: " << peso << ", " << "Centro de salud: " << centro_salud << ", " << "Tipo de sangre: " << tipos_sangre << ", " << "RH: " << rh << ", " << "Fluido elegido: " << fluido_elegido << ", " << "Partido: " << partido << ", " << "Provincia: " << provincia;
+	return s.str();
+}
 cReceptor::~cReceptor() {
 }
 //nuevo

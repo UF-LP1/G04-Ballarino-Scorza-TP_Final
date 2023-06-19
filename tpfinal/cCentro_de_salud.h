@@ -13,6 +13,7 @@
 #include"cSangre.h"
 #include"cMedula_osea.h"
 #include "cPlasma.h"
+#include<sstream>
 using namespace std;
 class cBSA;
 class cCentro_de_salud {
@@ -33,6 +34,7 @@ public:
 	list<cPaciente*> get_pacientes_del_centro();
 	void protocolo_de_transplante_final(cReceptor* receptor_seleccionado, cDonante* donante_seleccionado, list<cReceptor*> receptores);
 	friend class cBSA;
+	string to_string();
 	cCentro_de_salud();
 };
 

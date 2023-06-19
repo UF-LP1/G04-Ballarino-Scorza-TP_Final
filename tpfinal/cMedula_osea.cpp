@@ -23,5 +23,11 @@ bool cMedula_osea::VerificarFechaMaxima(tm fecha) {
 cMedula_osea::cMedula_osea() :cFluido(estado) {
 
 }
+string cMedula_osea::to_string() {
+	stringstream s;
+	s << " Atributos de Medula osea:" << endl << endl;
+	s << "estado" << estado << " color " << color;
+	return s.str();
+}
 cMedula_osea::~cMedula_osea() {}
 //NUEVO

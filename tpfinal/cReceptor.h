@@ -1,6 +1,6 @@
 //NUEVO
 #pragma once
-
+#include<sstream>
 #include "cPaciente.h"
 
 class cReceptor :public cPaciente {
@@ -19,6 +19,7 @@ public:
 	unsigned int get_prioridad();
 	void set_estado(estado estado_pac);
 	estado get_estado();
+	string to_string();
 	//void set_fecha_agregado_espera(tm fecha_agregado_espera);
 	tm get_fecha_agregado_espera();
 	~cReceptor();

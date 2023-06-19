@@ -3,5 +3,6 @@
 cFluido::cFluido(string estado) {
 	this->estado = estado;
 }
+
 cFluido::~cFluido() {
 }//nuevo

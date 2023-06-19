@@ -29,5 +29,13 @@ bool cSangre::VerificarFechaMaxima(tm fecha) {
 cSangre::cSangre() :cFluido(estado) {
 
 }
+string cSangre::to_string() {
+	stringstream s;
+	s << " Atributos de Sangre:" << endl << endl;
+	s << "estado" << estado;
+	s << "Atributos del receptor: " << "Tipo de sangre: " << static_cast<int>(tipo_de_sangre) << ", " << "RH: " << static_cast<int>(rh);//se utiliza static_cast<int>(tipo_de_sangre) y static_cast<int>(rh) para convertir los valores enumerados en enteros y poder imprimirlos en la cadena de texto.
+	return s.str();
+}
+
 cSangre::~cSangre() {}
 //nuevo
